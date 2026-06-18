@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VedSphere — Salesforce Revenue Cloud, CPQ & Implementation Partner | India & USA</title>
-<meta name="description" content="VedSphere helps growing businesses get more from Salesforce — Revenue Cloud, CPQ, Sales, Service & Marketing Cloud implementations, migrations and ongoing support. Based in India, serving clients across India & the USA.">
+<title>VedSphere  Salesforce Revenue Cloud, CPQ & Implementation Partner | India & USA</title>
+<meta name="description" content="VedSphere helps growing businesses get more from Salesforce  Revenue Cloud, CPQ, Sales, Service & Marketing Cloud implementations, migrations and ongoing support. Based in India, serving clients across India & the USA.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -54,8 +54,12 @@
   ::selection{background:var(--blue);color:#fff}
   .wrap{max-width:var(--maxw);margin:0 auto;padding:0 26px}
   .eyebrow{
-    font-family:var(--body);font-weight:700;font-size:.74rem;letter-spacing:.18em;
-    text-transform:uppercase;color:var(--blue);
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:var(--body);font-weight:800;font-size:.82rem;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--blue);margin-bottom:14px;
+  }
+  .eyebrow::before{
+    content:"";width:26px;height:2px;border-radius:2px;background:currentColor;
   }
 
   /* ---------- NAV ---------- */
@@ -82,8 +86,17 @@
   }
   .logo span.dot{color:var(--teal)}
   .navlinks{display:flex;align-items:center;gap:26px;list-style:none}
-  .navlinks a{color:rgba(255,255,255,.78);font-weight:500;font-size:.92rem;transition:color .2s}
-  .navlinks a:hover{color:#fff}
+  .navlinks a{
+    position:relative;display:inline-block;color:rgba(255,255,255,.78);font-weight:500;font-size:.92rem;
+    transition:color .25s ease,transform .25s cubic-bezier(.22,1,.36,1);
+  }
+  .navlinks a::after{
+    content:"";position:absolute;left:0;right:0;bottom:-6px;height:2px;border-radius:2px;
+    background:linear-gradient(90deg,var(--blue-bright),var(--teal));
+    transform:scaleX(0);transform-origin:left;transition:transform .28s cubic-bezier(.22,1,.36,1);
+  }
+  .navlinks a:hover{color:#fff;transform:translateY(-3px) scale(1.12)}
+  .navlinks a:hover::after{transform:scaleX(1)}
   .navregion{
     display:flex;align-items:center;gap:7px;color:rgba(255,255,255,.6);font-size:.78rem;
     border:1px solid rgba(255,255,255,.16);padding:5px 11px;border-radius:99px;font-weight:600;
@@ -91,9 +104,17 @@
   .navregion b{color:#fff;font-weight:600}
   .nav-cta{
     background:#fff;color:var(--navy-900);padding:10px 20px;border-radius:99px;
-    font-weight:700;font-size:.9rem;transition:transform .25s,box-shadow .25s;white-space:nowrap;
+    font-weight:700;font-size:.9rem;transition:transform .25s,box-shadow .25s,background .25s,color .25s;white-space:nowrap;
   }
-  .nav-cta:hover{transform:translateY(-2px);box-shadow:0 12px 28px -10px rgba(255,255,255,.4)}
+  .nav-cta:hover{
+    background:linear-gradient(135deg,var(--teal),var(--teal-deep));color:#fff;
+    transform:translateY(-3px);
+    box-shadow:0 18px 38px -10px rgba(18,182,168,.65),0 6px 14px -6px rgba(18,182,168,.5);
+  }
+  .nav-cta:active{
+    background:linear-gradient(135deg,var(--teal),var(--teal-deep));color:#fff;
+    transform:translateY(0) scale(.97);box-shadow:0 10px 24px -10px rgba(18,182,168,.7);
+  }
   .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px}
   .burger span{width:24px;height:2px;background:#fff;border-radius:2px;transition:.3s}
 
@@ -132,6 +153,18 @@
   .hero .hero-panel .agent-row .txt b{font-size:.85rem}
   .hero .hero-panel .agent-row .txt span{font-size:.72rem}
   .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center}
+  .hero-badge{display:flex;justify-content:center;align-items:center;position:relative;left:-160px}
+  .hero-badge img{
+    width:120px;height:auto;border-radius:18px;
+    box-shadow:0 24px 60px -20px rgba(0,0,0,.65);
+    transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s ease;
+    will-change:transform;
+  }
+  .hero-badge img:hover{
+    transform:translateY(-8px) scale(1.04) rotate(-1.5deg);
+    box-shadow:0 34px 74px -18px rgba(31,143,240,.6);
+  }
+  @media(max-width:980px){.hero-badge{justify-content:flex-start;margin-top:8px}.hero-badge img{width:140px}}
   .hero-tag{
     display:inline-flex;align-items:center;gap:9px;background:rgba(31,143,240,.12);
     border:1px solid rgba(31,143,240,.3);color:var(--blue-bright);
@@ -170,10 +203,20 @@
   .hero-panel-head b{font-family:var(--serif);font-size:1.02rem;color:#fff;display:block}
   .hero-panel-head small{color:rgba(255,255,255,.55);font-size:.78rem}
   .agent-row{
+    --accent:var(--blue-bright);
     display:flex;align-items:center;gap:12px;padding:13px 14px;border-radius:13px;
     background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);margin-bottom:9px;
+    transition:transform .3s cubic-bezier(.22,1,.36,1),background .3s ease,border-color .3s ease,box-shadow .3s ease;
   }
-  .agent-row .ic{width:32px;height:32px;border-radius:9px;display:grid;place-items:center;flex:none;font-size:.9rem}
+  .agent-row:has(.ic.t){--accent:var(--teal)}
+  .agent-row:hover{
+    transform:translateX(4px);
+    background:color-mix(in srgb,var(--accent) 12%,rgba(255,255,255,.04));
+    border-color:color-mix(in srgb,var(--accent) 55%,transparent);
+    box-shadow:0 14px 30px -16px color-mix(in srgb,var(--accent) 80%,transparent);
+  }
+  .agent-row:hover .ic{transform:scale(1.1) rotate(-4deg)}
+  .agent-row .ic{width:32px;height:32px;border-radius:9px;display:grid;place-items:center;flex:none;font-size:.9rem;transition:transform .3s cubic-bezier(.22,1,.36,1)}
   .ic.b{background:rgba(31,143,240,.16);color:var(--blue-bright)}
   .ic.t{background:rgba(18,182,168,.16);color:var(--teal)}
   .agent-row .txt{flex:1}
@@ -199,13 +242,31 @@
   .approach{background:var(--mist)}
   .appr-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
   .appr-list{display:flex;flex-direction:column;gap:20px}
-  .appr-item{display:flex;gap:16px}
+  .appr-item{
+    --accent:var(--blue);
+    display:flex;gap:16px;padding:16px;border-radius:16px;
+    border:1px solid transparent;background:transparent;
+    transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s ease,border-color .35s ease,background .35s ease;
+  }
+  .appr-item:hover{
+    transform:translateY(-4px);
+    border-color:color-mix(in srgb,var(--accent) 45%,transparent);
+    background:color-mix(in srgb,var(--accent) 7%,transparent);
+    box-shadow:0 22px 48px -22px color-mix(in srgb,var(--accent) 70%,transparent);
+  }
   .appr-item .num{
     width:40px;height:40px;border-radius:11px;flex:none;display:grid;place-items:center;
     font-family:var(--serif);font-weight:700;color:#fff;
     background:linear-gradient(135deg,var(--blue),var(--blue-deep));
+    transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s ease;
   }
+  .appr-item:hover .num{
+    transform:scale(1.08) rotate(-3deg);
+    box-shadow:0 12px 26px -10px color-mix(in srgb,var(--accent) 85%,transparent);
+  }
+  .appr-item:nth-child(2){--accent:var(--teal)}
   .appr-item:nth-child(2) .num{background:linear-gradient(135deg,var(--teal),var(--teal-deep))}
+  .appr-item:nth-child(3){--accent:#5b7bd6}
   .appr-item:nth-child(3) .num{background:linear-gradient(135deg,#5b7bd6,#3a52a0)}
   .appr-item h4{font-size:1.12rem;margin-bottom:4px}
   .appr-item p{color:var(--slate);font-size:.96rem}
@@ -456,7 +517,7 @@
   <div class="wrap">
     <div class="hero-grid">
       <div>
-        <h1 class="reveal">Get more from Salesforce — especially <span class="grad">Revenue Cloud &amp; CPQ.</span></h1>
+        <h1 class="reveal">Get more from Salesforce  especially <span class="grad">Revenue Cloud &amp; CPQ.</span></h1>
         <p class="lead reveal d2">VedSphere is a certified Salesforce implementation partner helping growing businesses implement, migrate, and run Salesforce the right way. We specialise in Revenue Cloud and CPQ, and support every cloud across Sales, Service, Marketing, and beyond.</p>
         <div class="hero-actions reveal d3">
           <a href="#packages" class="btn btn-primary">See Packages &amp; Pricing
@@ -464,6 +525,9 @@
           </a>
           <a href="#contact" class="btn btn-ghost">Talk to an expert</a>
         </div>
+      </div>
+      <div class="hero-badge reveal d2">
+        <img src="SFBadge.png" alt="Salesforce Partner" width="180" height="190">
       </div>
     </div>
   </div>
@@ -487,21 +551,21 @@
     <div class="appr-grid">
       <div class="reveal">
         <span class="eyebrow">Our Approach</span>
-        <h2>Salesforce, simplified — built around how your team actually sells.</h2>
-        <p style="color:var(--slate);font-size:1.06rem">A lot of Salesforce projects fail because they're too big, too slow, or too vague. We do the opposite. We scope tightly, lean heavily on our Revenue Cloud &amp; CPQ expertise to fix pricing and quoting headaches, and ship working solutions in weeks — not quarters.</p>
+        <h2>Salesforce, simplified  built around how your team actually sells.</h2>
+        <p style="color:var(--slate);font-size:1.06rem">A lot of Salesforce projects fail because they're too big, too slow, or too vague. We do the opposite. We scope tightly, lean heavily on our Revenue Cloud &amp; CPQ expertise to fix pricing and quoting headaches, and ship working solutions in weeks  not quarters.</p>
       </div>
       <div class="appr-list">
         <div class="appr-item reveal d1">
           <div class="num">1</div>
-          <div><h4>Free discovery call, honest scoping</h4><p>We start by understanding your sales process and pain points — then tell you exactly what's worth fixing first.</p></div>
+          <div><h4>Free discovery call, honest scoping</h4><p>We start by understanding your sales process and pain points  then tell you exactly what's worth fixing first.</p></div>
         </div>
         <div class="appr-item reveal d2">
           <div class="num">2</div>
-          <div><h4>Configure, test, train — fast</h4><p>We build in short sprints with regular check-ins, so you always know what's happening and nothing feels like a black box.</p></div>
+          <div><h4>Configure, test, train  fast</h4><p>We build in short sprints with regular check-ins, so you always know what's happening and nothing feels like a black box.</p></div>
         </div>
         <div class="appr-item reveal d3">
           <div class="num">3</div>
-          <div><h4>Support that doesn't disappear post go-live</h4><p>Ongoing admin support, enhancements, and Salesforce health checks — we stick around after launch.</p></div>
+          <div><h4>Support that doesn't disappear post go-live</h4><p>Ongoing admin support, enhancements, and Salesforce health checks  we stick around after launch.</p></div>
         </div>
       </div>
     </div>
@@ -514,7 +578,7 @@
     <div class="sec-head center reveal">
       <span class="eyebrow">What We Do</span>
       <h2>Salesforce services for every cloud</h2>
-      <p>Whether you need a brand-new implementation, a tricky migration, or someone to simply keep things running — our team covers the full Salesforce ecosystem.</p>
+      <p>Whether you need a brand-new implementation, a tricky migration, or someone to simply keep things running  our team covers the full Salesforce ecosystem.</p>
     </div>
     <div class="svc-grid">
 
@@ -523,7 +587,7 @@
         <div class="svc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h10"/></svg></div>
         <span class="svc-tag">Revenue Cloud &amp; CPQ</span>
         <h3>Quoting, pricing &amp; billing, sorted</h3>
-        <p>Complex price books, bundles, discounting rules, and approval flows — built right and migrated cleanly from legacy CPQ.</p>
+        <p>Complex price books, bundles, discounting rules, and approval flows  built right and migrated cleanly from legacy CPQ.</p>
         <ul>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>New CPQ implementations</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>CPQ → Revenue Cloud Advanced migration</li>
@@ -583,7 +647,7 @@
         <div class="svc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="7" width="16" height="12" rx="3"/><path d="M9 3v4M15 3v4M9 13h.01M15 13h.01M9 16h6"/></svg></div>
         <span class="svc-tag">Agentforce &amp; AI</span>
         <h3>Autonomous AI agents</h3>
-        <p>Practical Agentforce use cases — lead qualification, case triage, and renewal alerts that work while you sleep.</p>
+        <p>Practical Agentforce use cases  lead qualification, case triage, and renewal alerts that work while you sleep.</p>
         <ul>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Lead &amp; case-handling agents</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Renewal &amp; revenue alerts</li>
@@ -601,18 +665,18 @@
   <div class="wrap" style="position:relative;z-index:2">
     <div class="sec-head reveal">
       <span class="eyebrow" style="color:var(--teal)">Our Specialty</span>
-      <h2 style="color:#fff">Revenue Cloud &amp; CPQ — where most teams get stuck (and we don't)</h2>
-      <p style="color:rgba(255,255,255,.66)">Pricing, quoting, and billing are the most tangled parts of Salesforce — and the part most consultants quietly avoid. It's the part we love.</p>
+      <h2 style="color:#fff">Revenue Cloud &amp; CPQ  where most teams get stuck (and we don't)</h2>
+      <p style="color:rgba(255,255,255,.66)">Pricing, quoting, and billing are the most tangled parts of Salesforce  and the part most consultants quietly avoid. It's the part we love.</p>
     </div>
     <div class="appr-grid" style="align-items:flex-start">
       <div class="appr-list">
         <div class="appr-item reveal">
           <div class="num" style="background:linear-gradient(135deg,var(--blue),var(--blue-deep))">1</div>
-          <div><h4 style="color:#fff">New CPQ Implementations</h4><p style="color:rgba(255,255,255,.65)">Product catalogues, price rules, discount schedules, and approval workflows — set up to match how you actually price deals.</p></div>
+          <div><h4 style="color:#fff">New CPQ Implementations</h4><p style="color:rgba(255,255,255,.65)">Product catalogues, price rules, discount schedules, and approval workflows  set up to match how you actually price deals.</p></div>
         </div>
         <div class="appr-item reveal d1">
           <div class="num" style="background:linear-gradient(135deg,var(--teal),var(--teal-deep))">2</div>
-          <div><h4 style="color:#fff">CPQ to Revenue Cloud Advanced Migration</h4><p style="color:rgba(255,255,255,.65)">Moving from legacy CPQ? We audit your existing configuration, prune the technical debt, and migrate cleanly — no copy-pasting old mess into a new system.</p></div>
+          <div><h4 style="color:#fff">CPQ to Revenue Cloud Advanced Migration</h4><p style="color:rgba(255,255,255,.65)">Moving from legacy CPQ? We audit your existing configuration, prune the technical debt, and migrate cleanly  no copy-pasting old mess into a new system.</p></div>
         </div>
         <div class="appr-item reveal d2">
           <div class="num" style="background:linear-gradient(135deg,#5b7bd6,#3a52a0)">3</div>
@@ -638,7 +702,7 @@
     <div class="sec-head center reveal">
       <span class="eyebrow">Simple, Honest Pricing</span>
       <h2>Packages for every stage</h2>
-      <p>Not sure where to start? Our Essentials package is built for teams who just need the basics done right — fast, focused, and with no long-term lock-in.</p>
+      <p>Not sure where to start? Our Essentials package is built for teams who just need the basics done right  fast, focused, and with no long-term lock-in.</p>
     </div>
     <div class="pkg-grid">
 
@@ -647,9 +711,9 @@
         <span class="kick">Basic implementation</span>
         <h3>Essentials</h3>
         <div class="price"><span class="amt" style="font-size:1.6rem">Get a quote</span></div>
-        <p class="desc">A clean, no-frills setup of your core Salesforce instance — built to get your team off spreadsheets and onto a working CRM, fast.</p>
+        <p class="desc">A clean, no-frills setup of your core Salesforce instance  built to get your team off spreadsheets and onto a working CRM, fast.</p>
         <ul>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg><span>Setup of <b>core objects</b> — Leads, Accounts, Contacts, Opportunities</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg><span>Setup of <b>core objects</b>  Leads, Accounts, Contacts, Opportunities</span></li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg><span>Page layouts, fields &amp; record types tailored to your process</span></li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg><span>User setup, profiles &amp; basic security</span></li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg><span>Core reports &amp; dashboards</span></li>
@@ -665,10 +729,10 @@
         <span class="kick">Implementation + CPQ basics</span>
         <h3>Growth</h3>
         <div class="price"><span class="amt" style="font-size:1.6rem">Get a quote</span></div>
-        <p class="desc">Everything in Essentials, plus automation and a working CPQ setup — for teams ready to streamline how they sell and quote.</p>
+        <p class="desc">Everything in Essentials, plus automation and a working CPQ setup  for teams ready to streamline how they sell and quote.</p>
         <ul>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg><span>Everything in <b>Essentials</b></span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg><span>Basic <b>CPQ setup</b> — price books, products &amp; quote templates</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg><span>Basic <b>CPQ setup</b>  price books, products &amp; quote templates</span></li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg><span>Lead routing, assignment rules &amp; approval flows</span></li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg><span>Email-to-case or basic Service Cloud setup</span></li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg><span>Extended training &amp; documentation</span></li>
@@ -682,7 +746,7 @@
         <span class="kick">Revenue Cloud &amp; multi-cloud</span>
         <h3>Advanced</h3>
         <div class="price"><span class="amt" style="font-size:1.6rem">Custom</span></div>
-        <p class="desc">For businesses with bigger needs — full Revenue Cloud Advanced migrations, multi-cloud projects, integrations, and AI agents.</p>
+        <p class="desc">For businesses with bigger needs  full Revenue Cloud Advanced migrations, multi-cloud projects, integrations, and AI agents.</p>
         <ul>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg><span><b>CPQ → Revenue Cloud Advanced</b> migration</span></li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg><span>Multi-cloud implementation (Sales + Service + Marketing)</span></li>
@@ -703,7 +767,7 @@
     <div class="sec-head center reveal">
       <span class="eyebrow">How We Work</span>
       <h2>From first call to go-live</h2>
-      <p>A clear, predictable process — so you always know what's happening and when.</p>
+      <p>A clear, predictable process  so you always know what's happening and when.</p>
     </div>
     <div class="road-grid">
       <div class="road-card reveal">
@@ -714,12 +778,12 @@
       <div class="road-card reveal d1">
         <div class="road-num">2</div>
         <h4>Scope &amp; Quote</h4>
-        <p>You get a clear proposal — what's included, the timeline, and a fixed price. No surprises later.</p>
+        <p>You get a clear proposal  what's included, the timeline, and a fixed price. No surprises later.</p>
       </div>
       <div class="road-card reveal d2">
         <div class="road-num">3</div>
         <h4>Build &amp; Test</h4>
-        <p>We configure, test, and walk you through everything before it goes live — with regular updates.</p>
+        <p>We configure, test, and walk you through everything before it goes live  with regular updates.</p>
       </div>
       <div class="road-card reveal d3">
         <div class="road-num">4</div>
@@ -741,23 +805,23 @@
     <div class="faq-list reveal d1">
       <div class="faq-item">
         <div class="faq-q">What if I don't know which package I need? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg></div>
-        <div class="faq-a"><p>That's completely normal! Book a free discovery call and we'll walk through your setup together, then recommend the right starting point — no pressure, no jargon.</p></div>
+        <div class="faq-a"><p>That's completely normal! Book a free discovery call and we'll walk through your setup together, then recommend the right starting point  no pressure, no jargon.</p></div>
       </div>
       <div class="faq-item">
         <div class="faq-q">Do you only work with large companies? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg></div>
-        <div class="faq-a"><p>Not at all — our Starter and Growth packages were built specifically for small and mid-sized teams who want professional Salesforce help without enterprise-level costs.</p></div>
+        <div class="faq-a"><p>Not at all  our Starter and Growth packages were built specifically for small and mid-sized teams who want professional Salesforce help without enterprise-level costs.</p></div>
       </div>
       <div class="faq-item">
         <div class="faq-q">What exactly is Revenue Cloud / CPQ, and do I need it? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg></div>
         <div class="faq-a"><p>CPQ (Configure, Price, Quote) and Revenue Cloud handle how you price products, generate quotes, and manage subscriptions/billing. If quoting feels slow, manual, or error-prone, that's usually a sign it's worth a conversation.</p></div>
       </div>
       <div class="faq-item">
-        <div class="faq-q">We're already on CPQ — can you help us migrate to Revenue Cloud Advanced? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg></div>
-        <div class="faq-a"><p>Yes — this is one of our core specialities. We audit your current setup, identify what's worth keeping, prune outdated configuration, and migrate cleanly to Revenue Cloud Advanced.</p></div>
+        <div class="faq-q">We're already on CPQ  can you help us migrate to Revenue Cloud Advanced? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg></div>
+        <div class="faq-a"><p>Yes  this is one of our core specialities. We audit your current setup, identify what's worth keeping, prune outdated configuration, and migrate cleanly to Revenue Cloud Advanced.</p></div>
       </div>
       <div class="faq-item">
         <div class="faq-q">Do you offer ongoing support after go-live? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg></div>
-        <div class="faq-a"><p>Yes — every package includes some post-launch support, and we offer ongoing managed support plans for businesses that want a long-term Salesforce partner on call.</p></div>
+        <div class="faq-a"><p>Yes  every package includes some post-launch support, and we offer ongoing managed support plans for businesses that want a long-term Salesforce partner on call.</p></div>
       </div>
     </div>
   </div>
@@ -795,7 +859,7 @@
     <div class="foot-grid">
       <div class="foot-about">
         <a href="#top" class="logo"><span class="mark"></span>Ved<span class="dot">Sphere</span></a>
-        <p>A certified Salesforce implementation partner specialising in Revenue Cloud &amp; CPQ — with services across every Salesforce cloud, from quick essentials to full multi-cloud transformations.</p>
+        <p>A certified Salesforce implementation partner specialising in Revenue Cloud &amp; CPQ  with services across every Salesforce cloud, from quick essentials to full multi-cloud transformations.</p>
         <div class="foot-social">
           <a href="https://www.linkedin.com/company/vedsphere" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2zM8.34 18.34V9.93H5.67v8.41zM7 8.76a1.55 1.55 0 100-3.1 1.55 1.55 0 000 3.1m11.34 9.58v-4.61c0-2.46-1.31-3.6-3.06-3.6a2.64 2.64 0 00-2.39 1.32V9.93H10.2v8.41h2.67v-4.45c0-1.17.22-2.3 1.67-2.3s1.45 1.34 1.45 2.38v4.37z"/></svg></a>
           <a href="https://instagram.com/vedsphere" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
@@ -917,5 +981,6 @@
     setTimeout(() => (canvas.style.opacity = "1"), 0);
   }
 </script>
+<script src="lead-popup.js" defer></script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-// ===== VedSphere — shared article behaviour =====
+// ===== VedSphere  shared article behaviour =====
 (function () {
   // nav background on scroll
   const header = document.getElementById('header');
