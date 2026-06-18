@@ -115,43 +115,62 @@
   .gborder:hover::before{opacity:1}
 
   /* ---------- NAV ---------- */
-  header{position:fixed;top:0;left:0;right:0;z-index:100;transition:all .35s ease}
+  header{position:fixed;top:0;left:0;right:0;z-index:100;transition:background .35s ease,box-shadow .35s ease}
   .nav{
     display:flex;align-items:center;justify-content:space-between;
     height:74px;
   }
   .navbg{
     background:rgba(10,19,34,.72);
-    backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
-    border-bottom:1px solid rgba(255,255,255,.07);
+    backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%);
+    border-bottom:1px solid rgba(255,255,255,.08);
+    box-shadow:0 10px 40px -24px rgba(0,0,0,.7);
   }
   .logo{display:flex;align-items:center;gap:11px;font-family:var(--serif);font-weight:800;font-size:1.28rem;color:#fff;letter-spacing:-.03em}
   .logo .mark{
     width:34px;height:34px;border-radius:9px;position:relative;flex:none;
-    background:linear-gradient(135deg,var(--blue) 0%,var(--teal) 100%);
+    background:var(--grad-brand);
     box-shadow:0 6px 20px -6px rgba(31,143,240,.7);
+    transition:transform .4s var(--ease-spring),box-shadow .4s ease;
   }
+  .logo:hover .mark{transform:rotate(-8deg) scale(1.06);box-shadow:0 10px 26px -6px rgba(31,143,240,.9)}
   .logo .mark::before{
     content:"";position:absolute;inset:8px;border-radius:50%;
     border:2.4px solid rgba(255,255,255,.92);border-right-color:transparent;border-bottom-color:transparent;
     transform:rotate(20deg);
   }
   .logo span.dot{color:var(--teal)}
-  .navlinks{display:flex;align-items:center;gap:26px;list-style:none}
-  .navlinks a{color:rgba(255,255,255,.78);font-weight:500;font-size:.92rem;transition:color .2s}
-  .navlinks a:hover{color:#fff}
+  .navlinks{display:flex;align-items:center;gap:28px;list-style:none}
+  .navlinks a{position:relative;color:rgba(255,255,255,.74);font-weight:500;font-size:.92rem;transition:color .25s;padding:4px 0}
+  .navlinks a::after{
+    content:"";position:absolute;left:0;right:100%;bottom:-3px;height:2px;border-radius:2px;
+    background:var(--grad-brand);transition:right .35s var(--ease-out);
+  }
+  .navlinks a:hover,.navlinks a.active{color:#fff}
+  .navlinks a:hover::after,.navlinks a.active::after{right:0}
   .navregion{
     display:flex;align-items:center;gap:7px;color:rgba(255,255,255,.6);font-size:.78rem;
     border:1px solid rgba(255,255,255,.16);padding:5px 11px;border-radius:99px;font-weight:600;
   }
   .navregion b{color:#fff;font-weight:600}
   .nav-cta{
+    position:relative;overflow:hidden;
     background:#fff;color:var(--navy-900);padding:10px 20px;border-radius:99px;
-    font-weight:700;font-size:.9rem;transition:transform .25s,box-shadow .25s;white-space:nowrap;
+    font-weight:700;font-size:.9rem;transition:transform .25s var(--ease-out),box-shadow .25s;white-space:nowrap;
   }
-  .nav-cta:hover{transform:translateY(-2px);box-shadow:0 12px 28px -10px rgba(255,255,255,.4)}
+  /* sheen sweep */
+  .nav-cta::before{
+    content:"";position:absolute;top:0;left:-120%;width:60%;height:100%;
+    background:linear-gradient(105deg,transparent,rgba(31,143,240,.25),transparent);
+    transform:skewX(-20deg);transition:left .6s var(--ease-out);
+  }
+  .nav-cta:hover{transform:translateY(-2px);box-shadow:0 12px 28px -10px rgba(255,255,255,.45)}
+  .nav-cta:hover::before{left:130%}
   .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px}
-  .burger span{width:24px;height:2px;background:#fff;border-radius:2px;transition:.3s}
+  .burger span{width:24px;height:2px;background:#fff;border-radius:2px;transition:transform .3s var(--ease-out),opacity .3s}
+  .burger.active span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .burger.active span:nth-child(2){opacity:0}
+  .burger.active span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 
   /* ---------- HERO ---------- */
   .hero{
@@ -159,10 +178,14 @@
     padding:170px 0 110px;
   }
   .hero::before{
-    content:"";position:absolute;inset:0;
-    background:
-      radial-gradient(700px 480px at 78% 12%,rgba(31,143,240,.28),transparent 60%),
-      radial-gradient(620px 520px at 12% 92%,rgba(18,182,168,.20),transparent 60%);
+    content:"";position:absolute;inset:-10%;
+    background:var(--grad-aurora-dark);
+    animation:auroraDrift 18s ease-in-out infinite alternate;
+  }
+  @keyframes auroraDrift{
+    0%{transform:translate3d(0,0,0) scale(1)}
+    50%{transform:translate3d(-2.5%,1.5%,0) scale(1.06)}
+    100%{transform:translate3d(2%,-2%,0) scale(1.03)}
   }
   .grid-tex{
     position:absolute;inset:0;opacity:.5;
@@ -191,26 +214,36 @@
   .hero-tag{
     display:inline-flex;align-items:center;gap:9px;background:rgba(31,143,240,.12);
     border:1px solid rgba(31,143,240,.3);color:var(--blue-bright);
-    padding:7px 15px;border-radius:99px;font-size:.78rem;font-weight:700;letter-spacing:.04em;margin-bottom:26px;
+    padding:7px 15px;border-radius:99px;font-size:var(--fs-xs);font-weight:700;letter-spacing:.04em;margin-bottom:26px;
   }
   .hero-tag .pulse{width:7px;height:7px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 0 rgba(18,182,168,.6);animation:pulse 2.2s infinite}
   @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(18,182,168,.55)}70%{box-shadow:0 0 0 9px rgba(18,182,168,0)}100%{box-shadow:0 0 0 0 rgba(18,182,168,0)}}
-  .hero h1{font-size:clamp(2.5rem,5.4vw,4.1rem);font-weight:800;letter-spacing:-.035em;margin-bottom:22px}
+  .hero h1{font-size:var(--fs-display);font-weight:800;letter-spacing:-.035em;margin-bottom:22px}
   .hero h1 .grad{
     background:linear-gradient(105deg,var(--blue-bright),var(--teal));
     -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
   }
-  .hero p.lead{font-size:1.16rem;color:rgba(255,255,255,.72);max-width:540px;margin-bottom:34px;font-weight:400}
+  .hero p.lead{font-size:var(--fs-lead);color:rgba(255,255,255,.72);max-width:540px;margin-bottom:34px;font-weight:400}
   .hero-actions{display:flex;gap:14px;flex-wrap:wrap}
   .btn{
+    position:relative;overflow:hidden;
     display:inline-flex;align-items:center;gap:9px;font-weight:700;font-size:.97rem;
-    padding:15px 28px;border-radius:99px;cursor:pointer;border:none;transition:transform .25s,box-shadow .25s,background .25s;
+    padding:15px 28px;border-radius:99px;cursor:pointer;border:none;
+    transition:transform .25s var(--ease-out),box-shadow .25s,background .25s;
   }
-  .btn-primary{background:linear-gradient(105deg,var(--blue),var(--blue-deep));color:#fff;box-shadow:0 16px 36px -14px rgba(31,143,240,.8)}
-  .btn-primary:hover{transform:translateY(-3px);box-shadow:0 22px 44px -14px rgba(31,143,240,.9)}
+  /* sheen sweep on buttons */
+  .btn::after{
+    content:"";position:absolute;top:0;left:-130%;width:55%;height:100%;
+    background:linear-gradient(105deg,transparent,rgba(255,255,255,.28),transparent);
+    transform:skewX(-20deg);transition:left .65s var(--ease-out);pointer-events:none;
+  }
+  .btn:hover::after{left:150%}
+  .btn-primary{background:var(--grad-brand-deep);color:#fff;box-shadow:0 16px 36px -14px rgba(31,143,240,.8)}
+  .btn-primary:hover{transform:translateY(-3px);box-shadow:0 22px 48px -14px rgba(31,143,240,.95)}
   .btn-ghost{background:rgba(255,255,255,.06);color:#fff;border:1px solid rgba(255,255,255,.18)}
   .btn-ghost:hover{background:rgba(255,255,255,.12);transform:translateY(-3px)}
-  .btn svg{width:17px;height:17px}
+  .btn svg{width:17px;height:17px;position:relative;transition:transform .3s var(--ease-out)}
+  .btn:hover svg{transform:translateX(4px)}
 
   /* hero panel */
   .hero-panel{
@@ -228,7 +261,9 @@
   .agent-row{
     display:flex;align-items:center;gap:12px;padding:13px 14px;border-radius:13px;
     background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);margin-bottom:9px;
+    transition:transform .3s var(--ease-out),background .3s,border-color .3s;
   }
+  .agent-row:hover{transform:translateX(4px);background:rgba(255,255,255,.07);border-color:rgba(18,182,168,.3)}
   .agent-row .ic{width:32px;height:32px;border-radius:9px;display:grid;place-items:center;flex:none;font-size:.9rem}
   .ic.b{background:rgba(31,143,240,.16);color:var(--blue-bright)}
   .ic.t{background:rgba(18,182,168,.16);color:var(--teal)}
@@ -238,11 +273,15 @@
   .agent-row .stat{font-family:var(--serif);font-weight:700;color:var(--teal);font-size:.92rem}
 
   /* ---------- TRUST BAR ---------- */
-  .trust{background:var(--navy-800);border-top:1px solid rgba(255,255,255,.06);padding:34px 0}
-  .trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center}
-  .trust-grid .n{font-family:var(--serif);font-weight:800;font-size:2rem;color:#fff;letter-spacing:-.03em}
+  .trust{position:relative;background:var(--navy-800);padding:var(--sp-10) 0}
+  .trust::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(31,143,240,.45),rgba(18,182,168,.45),transparent)}
+  .trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--sp-6);text-align:center}
+  .trust-grid>div{position:relative}
+  .trust-grid>div+div::before{content:"";position:absolute;left:0;top:50%;transform:translateY(-50%);height:46px;width:1px;background:linear-gradient(180deg,transparent,rgba(255,255,255,.14),transparent)}
+  .trust-grid .n{font-family:var(--serif);font-weight:800;font-size:2.1rem;color:#fff;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
   .trust-grid .n .u{color:var(--teal)}
-  .trust-grid .l{color:rgba(255,255,255,.55);font-size:.84rem;font-weight:500;margin-top:3px}
+  .trust-grid .l{color:rgba(255,255,255,.58);font-size:var(--fs-sm);font-weight:500;margin-top:var(--sp-1)}
+  @media(max-width:560px){.trust-grid>div:nth-child(odd)::before{display:none}}
 
   /* ---------- SECTION SHELL ---------- */
   section.block{padding:var(--sec-pad) 0}
@@ -252,56 +291,87 @@
   .sec-head p{color:var(--slate);font-size:var(--fs-lead)}
 
   /* ---------- INTRO / APPROACH ---------- */
-  .approach{background:var(--mist)}
-  .appr-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
-  .appr-list{display:flex;flex-direction:column;gap:20px}
-  .appr-item{display:flex;gap:16px}
+  .approach{background:var(--grad-wash-light)}
+  .appr-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-16);align-items:center}
+  .appr-head h2{font-size:var(--fs-h2);margin:var(--sp-3) 0 var(--sp-5)}
+  .appr-head p{color:var(--slate);font-size:var(--fs-lead)}
+  .appr-list{display:flex;flex-direction:column;gap:var(--sp-3)}
+  .appr-item{
+    display:flex;gap:var(--sp-4);padding:var(--sp-5);border-radius:var(--radius-sm);
+    border:1px solid transparent;
+    transition:transform .35s var(--ease-out),box-shadow .35s,background .35s,border-color .35s;
+  }
+  /* light variant (Approach) */
+  .approach .appr-item{background:rgba(255,255,255,.55);border-color:var(--line)}
+  .approach .appr-item:hover{transform:translateX(6px);background:#fff;box-shadow:var(--shadow)}
+  /* dark glass variant (Revenue Cloud spotlight) */
+  .premium .appr-item{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.08)}
+  .premium .appr-item:hover{transform:translateX(6px);background:rgba(255,255,255,.07);border-color:rgba(31,143,240,.35);box-shadow:var(--glow-blue)}
+  .premium .appr-item h4{color:#fff}
+  .premium .appr-item p{color:rgba(255,255,255,.66)}
+  /* Revenue Cloud spotlight shell */
+  .premium{position:relative;overflow:hidden;background:var(--navy-900);color:#fff}
+  .premium::before{content:"";position:absolute;inset:-10%;background:var(--grad-aurora-dark);animation:auroraDrift 22s ease-in-out infinite alternate}
+  .premium .wrap{position:relative;z-index:2}
+  .premium .sec-head h2{color:#fff}
+  .premium .sec-head p{color:rgba(255,255,255,.66)}
+  .premium .eyebrow{color:var(--teal)}
   .appr-item .num{
     width:40px;height:40px;border-radius:11px;flex:none;display:grid;place-items:center;
     font-family:var(--serif);font-weight:700;color:#fff;
-    background:linear-gradient(135deg,var(--blue),var(--blue-deep));
+    background:var(--grad-brand-deep);box-shadow:0 8px 20px -8px rgba(31,143,240,.6);
+    transition:transform .35s var(--ease-spring);
   }
-  .appr-item:nth-child(2) .num{background:linear-gradient(135deg,var(--teal),var(--teal-deep))}
-  .appr-item:nth-child(3) .num{background:linear-gradient(135deg,#5b7bd6,#3a52a0)}
-  .appr-item h4{font-size:1.12rem;margin-bottom:4px}
-  .appr-item p{color:var(--slate);font-size:.96rem}
+  .appr-item:hover .num{transform:scale(1.08) rotate(-4deg)}
+  .appr-item:nth-child(2) .num{background:linear-gradient(135deg,var(--teal),var(--teal-deep));box-shadow:0 8px 20px -8px rgba(18,182,168,.6)}
+  .appr-item:nth-child(3) .num{background:linear-gradient(135deg,#5b7bd6,#3a52a0);box-shadow:0 8px 20px -8px rgba(91,123,214,.6)}
+  .appr-item h4{font-size:var(--fs-h4);margin-bottom:var(--sp-1)}
+  .appr-item p{color:var(--slate);font-size:var(--fs-body)}
 
   /* ---------- ALL CLOUDS / SERVICES GRID ---------- */
   .services{background:#fff}
-  .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-6)}
   .svc-card{
-    background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:28px 26px;
-    transition:transform .35s cubic-bezier(.2,.7,.3,1),box-shadow .35s,border-color .35s;position:relative;overflow:hidden;
+    background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:var(--sp-8) var(--sp-6);
+    transition:transform .4s var(--ease-out),box-shadow .4s,border-color .4s;position:relative;overflow:hidden;
   }
-  .svc-card::after{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .4s}
-  .svc-card:hover{transform:translateY(-6px);box-shadow:var(--shadow);border-color:transparent}
+  .svc-card::after{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--grad-brand);transform:scaleX(0);transform-origin:left;transition:transform .45s var(--ease-out)}
+  .svc-card:hover{transform:translateY(-8px);box-shadow:var(--glow-blue);border-color:transparent}
   .svc-card:hover::after{transform:scaleX(1)}
   .svc-card.featured{
     background:linear-gradient(165deg,var(--navy-900),var(--navy-700));color:#fff;border-color:transparent;
   }
+  .svc-card.featured::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(380px 240px at 85% 0%,rgba(18,182,168,.22),transparent 65%);
+  }
+  .svc-card.featured>*{position:relative;z-index:1}
+  .svc-card.featured:hover{box-shadow:var(--glow-teal)}
   .svc-card.featured h3,.svc-card.featured .svc-tag{color:#fff}
-  .svc-card.featured p{color:rgba(255,255,255,.7)}
+  .svc-card.featured p{color:rgba(255,255,255,.72)}
   .svc-card.featured .svc-ic{background:rgba(255,255,255,.1);color:var(--teal)}
   .svc-card.featured::after{background:linear-gradient(90deg,var(--teal),var(--blue-bright))}
   .svc-card.featured .pill-new{
-    position:absolute;top:18px;right:18px;background:rgba(18,182,168,.18);color:var(--teal);
+    position:absolute;top:18px;right:18px;background:rgba(18,182,168,.18);color:var(--teal);z-index:2;
     font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:5px 11px;border-radius:99px;
     border:1px solid rgba(18,182,168,.35);
   }
   .svc-ic{
-    width:50px;height:50px;border-radius:13px;display:grid;place-items:center;margin-bottom:18px;color:#fff;
-    background:linear-gradient(135deg,var(--blue),var(--blue-deep));
+    width:50px;height:50px;border-radius:13px;display:grid;place-items:center;margin-bottom:var(--sp-5);color:#fff;
+    background:var(--grad-brand-deep);box-shadow:0 10px 24px -10px rgba(31,143,240,.6);
+    transition:transform .4s var(--ease-spring);
   }
+  .svc-card:hover .svc-ic{transform:translateY(-3px) scale(1.07) rotate(-4deg)}
   .svc-card:nth-child(2) .svc-ic{background:linear-gradient(135deg,var(--teal),var(--teal-deep))}
   .svc-card:nth-child(3) .svc-ic{background:linear-gradient(135deg,#5b7bd6,#3a52a0)}
   .svc-card:nth-child(5) .svc-ic{background:linear-gradient(135deg,#e08a3c,#c2660f)}
   .svc-card:nth-child(6) .svc-ic{background:linear-gradient(135deg,#7a5cd6,#4d34a8)}
   .svc-ic svg{width:24px;height:24px}
-  .svc-tag{font-size:.7rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--slate-light)}
-  .svc-card h3{font-size:1.18rem;margin:6px 0 10px}
-  .svc-card p{color:var(--slate);font-size:.92rem;margin-bottom:14px}
-  .svc-card ul{list-style:none;display:flex;flex-direction:column;gap:7px}
-  .svc-card ul li{display:flex;gap:8px;font-size:.85rem;color:var(--slate)}
+  .svc-tag{font-size:var(--fs-xs);font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--slate-light)}
+  .svc-card h3{font-size:var(--fs-h3);margin:var(--sp-2) 0 var(--sp-3)}
+  .svc-card p{color:var(--slate);font-size:var(--fs-body);margin-bottom:var(--sp-4)}
+  .svc-card ul{list-style:none;display:flex;flex-direction:column;gap:var(--sp-2)}
+  .svc-card ul li{display:flex;gap:var(--sp-2);font-size:var(--fs-sm);color:var(--slate)}
   .svc-card.featured ul li{color:rgba(255,255,255,.78)}
   .svc-card ul li svg{width:15px;height:15px;flex:none;margin-top:2px;color:var(--teal)}
   .svc-card.featured ul li svg{color:var(--teal)}
@@ -321,40 +391,51 @@
   .india-flag-chip{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);padding:6px 14px;border-radius:99px;font-size:.8rem;font-weight:700;color:var(--ink);margin-bottom:20px}
 
   /* ---------- PACKAGE CATALOG ---------- */
-  .pkg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+  .compare{background:var(--grad-wash-light)}
+  .pkg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-6);align-items:stretch}
   .pkg{
-    background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:30px 28px 32px;
-    position:relative;transition:transform .35s cubic-bezier(.2,.7,.3,1),box-shadow .35s,border-color .35s;overflow:hidden;
+    background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:var(--sp-8) var(--sp-6);
+    position:relative;transition:transform .4s var(--ease-out),box-shadow .4s,border-color .4s;overflow:hidden;
     display:flex;flex-direction:column;
   }
-  .pkg::after{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .4s}
+  .pkg::after{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .45s var(--ease-out)}
   .pkg:hover{transform:translateY(-8px);box-shadow:var(--shadow);border-color:transparent}
   .pkg:hover::after{transform:scaleX(1)}
   .pkg.starter{--accent:linear-gradient(90deg,var(--teal),var(--teal-deep))}
   .pkg.growth{--accent:linear-gradient(90deg,var(--blue),var(--blue-bright))}
   .pkg.scale{--accent:linear-gradient(90deg,#5b7bd6,#3a52a0)}
-  .pkg.popular{border-color:var(--blue);box-shadow:var(--shadow)}
+  /* popular card: elevated + always-on accent + soft glow */
+  .pkg.popular{border-color:rgba(31,143,240,.45);box-shadow:var(--glow-blue)}
+  .pkg.popular::after{transform:scaleX(1)}
+  .pkg.popular:hover{box-shadow:0 36px 80px -34px rgba(31,143,240,.7)}
+  @media(min-width:981px){.pkg.popular{transform:translateY(-12px) scale(1.015)}.pkg.popular:hover{transform:translateY(-20px) scale(1.015)}}
   .pkg-badge{
-    position:absolute;top:0;right:28px;background:linear-gradient(105deg,var(--blue),var(--blue-deep));
+    position:absolute;top:0;right:28px;background:var(--grad-brand-deep);
     color:#fff;font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
-    padding:7px 14px;border-radius:0 0 9px 9px;
+    padding:7px 14px;border-radius:0 0 9px 9px;box-shadow:0 10px 22px -10px rgba(31,143,240,.8);
   }
-  .pkg .kick{font-size:.72rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--slate-light)}
-  .pkg h3{font-size:1.4rem;margin:8px 0 6px}
-  .pkg .price{display:flex;align-items:baseline;gap:6px;margin-bottom:6px}
+  .pkg .kick{font-size:var(--fs-xs);font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--slate-light)}
+  .pkg h3{font-size:1.4rem;margin:var(--sp-2) 0 var(--sp-1)}
+  .pkg .price{display:flex;align-items:baseline;gap:6px;margin-bottom:var(--sp-1)}
   .pkg .price .amt{font-family:var(--serif);font-weight:800;font-size:2.1rem;color:var(--ink)}
+  .pkg .price .amt.text{font-size:1.6rem}
   .pkg .price .cur{font-family:var(--serif);font-weight:700;font-size:1.1rem;color:var(--slate)}
-  .pkg .price .per{color:var(--slate-light);font-size:.85rem}
-  .pkg .desc{color:var(--slate);font-size:.92rem;margin-bottom:18px}
-  .pkg ul{list-style:none;display:flex;flex-direction:column;gap:11px;margin-bottom:24px;flex:1}
-  .pkg ul li{display:flex;gap:10px;font-size:.89rem;color:var(--slate);line-height:1.45}
+  .pkg .price .per{color:var(--slate-light);font-size:var(--fs-sm)}
+  .pkg .desc{color:var(--slate);font-size:var(--fs-body);margin-bottom:var(--sp-5)}
+  .pkg ul{list-style:none;display:flex;flex-direction:column;gap:var(--sp-3);margin-bottom:var(--sp-6);flex:1}
+  .pkg ul li{display:flex;gap:var(--sp-3);font-size:var(--fs-sm);color:var(--slate);line-height:1.45}
   .pkg ul li svg{width:18px;height:18px;flex:none;margin-top:2px;color:var(--teal)}
   .pkg ul li b{color:var(--ink);font-weight:700}
   .pkg-cta{
+    position:relative;overflow:hidden;
     display:flex;align-items:center;justify-content:center;gap:8px;width:100%;text-align:center;font-weight:700;font-size:.94rem;
-    padding:13px 22px;border-radius:99px;border:1.5px solid var(--ink);color:var(--ink);transition:.25s;
+    padding:14px 22px;border-radius:99px;border:1.5px solid var(--ink);color:var(--ink);
+    transition:transform .25s var(--ease-out),box-shadow .25s,background .25s,color .25s,border-color .25s;
   }
-  .pkg.popular .pkg-cta{background:linear-gradient(105deg,var(--blue),var(--blue-deep));color:#fff;border-color:transparent;box-shadow:0 14px 30px -12px rgba(31,143,240,.7)}
+  .pkg-cta::after{content:"";position:absolute;top:0;left:-130%;width:55%;height:100%;background:linear-gradient(105deg,transparent,rgba(255,255,255,.3),transparent);transform:skewX(-20deg);transition:left .65s var(--ease-out)}
+  .pkg-cta:hover::after{left:160%}
+  .pkg:not(.popular) .pkg-cta:hover{background:var(--ink);color:#fff}
+  .pkg.popular .pkg-cta{background:var(--grad-brand-deep);color:#fff;border-color:transparent;box-shadow:0 14px 30px -12px rgba(31,143,240,.7)}
   .pkg-cta:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
 
   /* ---------- ROADMAP / PROCESS ---------- */
@@ -511,18 +592,19 @@
 
 <!-- HERO -->
 <section class="hero" id="top">
-  <div class="grid-tex"></div>
+  <div class="grid-tex" data-parallax="8"></div>
   <div class="hero-globe" aria-hidden="true"><canvas></canvas></div>
   <div class="wrap">
     <div class="hero-grid">
       <div>
-        <h1 class="reveal">Get more from Salesforce — especially <span class="grad">Revenue Cloud &amp; CPQ.</span></h1>
+        <span class="hero-tag reveal"><span class="pulse"></span>Revenue Cloud &amp; CPQ specialists</span>
+        <h1 class="reveal d1">Get more from Salesforce — especially <span class="grad">Revenue Cloud &amp; CPQ.</span></h1>
         <p class="lead reveal d2">VedSphere is a certified Salesforce implementation partner helping growing businesses implement, migrate, and run Salesforce the right way. We specialise in Revenue Cloud and CPQ, and support every cloud across Sales, Service, Marketing, and beyond.</p>
         <div class="hero-actions reveal d3">
-          <a href="#packages" class="btn btn-primary">See Packages &amp; Pricing
+          <a href="#packages" class="btn btn-primary" data-magnetic>See Packages &amp; Pricing
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
           </a>
-          <a href="#contact" class="btn btn-ghost">Talk to an expert</a>
+          <a href="#contact" class="btn btn-ghost" data-magnetic>Talk to an expert</a>
         </div>
       </div>
     </div>
@@ -534,8 +616,8 @@
   <div class="wrap">
           <div class="trust-grid">
       <div class="reveal"><div class="n">2 – 4<span class="u"> wks</span></div><div class="l">Avg. base package go-live</div></div>
-      <div class="reveal d1"><div class="n">8<span class="u">+</span></div><div class="l">Salesforce clouds covered</div></div>
-      <div class="reveal d2"><div class="n">100<span class="u">%</span></div><div class="l">Fixed-scope, transparent delivery</div></div>
+      <div class="reveal d1"><div class="n"><span data-count="8">8</span><span class="u">+</span></div><div class="l">Salesforce clouds covered</div></div>
+      <div class="reveal d2"><div class="n"><span data-count="100">100</span><span class="u">%</span></div><div class="l">Fixed-scope, transparent delivery</div></div>
       <div class="reveal d3"><div class="n">Certified</div><div class="l">Salesforce implementation partner</div></div>
     </div>
   </div>
@@ -545,10 +627,10 @@
 <section class="block approach" id="process">
   <div class="wrap">
     <div class="appr-grid">
-      <div class="reveal">
+      <div class="appr-head reveal">
         <span class="eyebrow">Our Approach</span>
-        <h2 style="font-size:clamp(2rem,3.6vw,2.85rem);margin:14px 0 18px">Salesforce, simplified — built around how your team actually sells.</h2>
-        <p style="color:var(--slate);font-size:1.06rem">A lot of Salesforce projects fail because they're too big, too slow, or too vague. We do the opposite. We scope tightly, lean heavily on our Revenue Cloud &amp; CPQ expertise to fix pricing and quoting headaches, and ship working solutions in weeks — not quarters.</p>
+        <h2>Salesforce, simplified — built around how your team actually sells.</h2>
+        <p>A lot of Salesforce projects fail because they're too big, too slow, or too vague. We do the opposite. We scope tightly, lean heavily on our Revenue Cloud &amp; CPQ expertise to fix pricing and quoting headaches, and ship working solutions in weeks — not quarters.</p>
       </div>
       <div class="appr-list">
         <div class="appr-item reveal d1">
@@ -656,27 +738,26 @@
 </section>
 
 <!-- REVENUE CLOUD & CPQ SPOTLIGHT -->
-<section class="block premium" id="revenue-cloud" style="background:var(--navy-900);color:#fff;position:relative;overflow:hidden">
-  <div class="grid-tex"></div>
-  <div class="wrap" style="position:relative;z-index:2">
+<section class="block premium" id="revenue-cloud">
+  <div class="wrap">
     <div class="sec-head reveal">
-      <span class="eyebrow" style="color:var(--teal)">Our Specialty</span>
-      <h2 style="color:#fff">Revenue Cloud &amp; CPQ — where most teams get stuck (and we don't)</h2>
-      <p style="color:rgba(255,255,255,.66)">Pricing, quoting, and billing are the most tangled parts of Salesforce — and the part most consultants quietly avoid. It's the part we love.</p>
+      <span class="eyebrow">Our Specialty</span>
+      <h2>Revenue Cloud &amp; CPQ — where most teams get stuck (and we don't)</h2>
+      <p>Pricing, quoting, and billing are the most tangled parts of Salesforce — and the part most consultants quietly avoid. It's the part we love.</p>
     </div>
     <div class="appr-grid" style="align-items:flex-start">
       <div class="appr-list">
         <div class="appr-item reveal">
-          <div class="num" style="background:linear-gradient(135deg,var(--blue),var(--blue-deep))">1</div>
-          <div><h4 style="color:#fff">New CPQ Implementations</h4><p style="color:rgba(255,255,255,.65)">Product catalogues, price rules, discount schedules, and approval workflows — set up to match how you actually price deals.</p></div>
+          <div class="num">1</div>
+          <div><h4>New CPQ Implementations</h4><p>Product catalogues, price rules, discount schedules, and approval workflows — set up to match how you actually price deals.</p></div>
         </div>
         <div class="appr-item reveal d1">
-          <div class="num" style="background:linear-gradient(135deg,var(--teal),var(--teal-deep))">2</div>
-          <div><h4 style="color:#fff">CPQ to Revenue Cloud Advanced Migration</h4><p style="color:rgba(255,255,255,.65)">Moving from legacy CPQ? We audit your existing configuration, prune the technical debt, and migrate cleanly — no copy-pasting old mess into a new system.</p></div>
+          <div class="num">2</div>
+          <div><h4>CPQ to Revenue Cloud Advanced Migration</h4><p>Moving from legacy CPQ? We audit your existing configuration, prune the technical debt, and migrate cleanly — no copy-pasting old mess into a new system.</p></div>
         </div>
         <div class="appr-item reveal d2">
-          <div class="num" style="background:linear-gradient(135deg,#5b7bd6,#3a52a0)">3</div>
-          <div><h4 style="color:#fff">Subscription, Billing &amp; Renewals</h4><p style="color:rgba(255,255,255,.65)">Automated renewals, usage-based billing, and amendment flows that keep finance and sales in sync.</p></div>
+          <div class="num">3</div>
+          <div><h4>Subscription, Billing &amp; Renewals</h4><p>Automated renewals, usage-based billing, and amendment flows that keep finance and sales in sync.</p></div>
         </div>
       </div>
       <div class="hero-panel reveal d2" style="margin-top:0">
@@ -693,7 +774,7 @@
 </section>
 
 <!-- PACKAGE CATALOG -->
-<section class="block compare" id="packages" style="background:var(--mist)">
+<section class="block compare" id="packages">
   <div class="wrap">
     <div class="sec-head center reveal">
       <span class="eyebrow">Simple, Honest Pricing</span>
@@ -706,7 +787,7 @@
       <article class="pkg starter reveal">
         <span class="kick">Basic implementation</span>
         <h3>Essentials</h3>
-        <div class="price"><span class="amt" style="font-size:1.6rem">Get a quote</span></div>
+        <div class="price"><span class="amt text">Get a quote</span></div>
         <p class="desc">A clean, no-frills setup of your core Salesforce instance — built to get your team off spreadsheets and onto a working CRM, fast.</p>
         <ul>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg><span>Setup of <b>core objects</b> — Leads, Accounts, Contacts, Opportunities</span></li>
@@ -724,7 +805,7 @@
         <span class="pkg-badge">Most Popular</span>
         <span class="kick">Implementation + CPQ basics</span>
         <h3>Growth</h3>
-        <div class="price"><span class="amt" style="font-size:1.6rem">Get a quote</span></div>
+        <div class="price"><span class="amt text">Get a quote</span></div>
         <p class="desc">Everything in Essentials, plus automation and a working CPQ setup — for teams ready to streamline how they sell and quote.</p>
         <ul>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg><span>Everything in <b>Essentials</b></span></li>
@@ -741,7 +822,7 @@
       <article class="pkg scale reveal d2">
         <span class="kick">Revenue Cloud &amp; multi-cloud</span>
         <h3>Advanced</h3>
-        <div class="price"><span class="amt" style="font-size:1.6rem">Custom</span></div>
+        <div class="price"><span class="amt text">Custom</span></div>
         <p class="desc">For businesses with bigger needs — full Revenue Cloud Advanced migrations, multi-cloud projects, integrations, and AI agents.</p>
         <ul>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg><span><b>CPQ → Revenue Cloud Advanced</b> migration</span></li>
