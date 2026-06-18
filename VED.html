@@ -8,8 +8,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="modulepreload" href="./cobe.min.js">
-<link rel="modulepreload" href="./phenomenon.min.js">
+<link rel="preload" href="./phenomenon.min.js" as="script">
+<link rel="preload" href="./cobe.min.js" as="script">
 <style>
   :root{
     --navy-900:#0a1322;
@@ -887,11 +887,12 @@
 </script>
 
 <!-- Hero globe (cobe) -->
-<script type="module">
-  import createGlobe from "./cobe.min.js";
-
+<script src="./phenomenon.min.js"></script>
+<script src="./cobe.min.js"></script>
+<script>
   const canvas = document.querySelector(".hero-globe canvas");
-  if (canvas && window.matchMedia("(min-width:981px)").matches) {
+  if (canvas && window.createGlobe && window.matchMedia("(min-width:981px)").matches) {
+    const createGlobe = window.createGlobe;
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const scale = 1.5; // render resolution (1.5 = crisp + light; 2 = full retina)
     let phi = 0;
