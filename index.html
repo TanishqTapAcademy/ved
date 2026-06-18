@@ -439,21 +439,32 @@
   .pkg-cta:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
 
   /* ---------- ROADMAP / PROCESS ---------- */
-  .road-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;position:relative}
-  .road-card{
-    background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:28px 24px;position:relative;
-    transition:transform .3s,box-shadow .3s;
+  .road-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--sp-6);position:relative}
+  /* connector line behind the number badges (desktop) */
+  .road-grid::before{
+    content:"";position:absolute;top:calc(var(--sp-8) + 19px);left:8%;right:8%;height:2px;
+    background:linear-gradient(90deg,rgba(31,143,240,.35),rgba(18,182,168,.35),rgba(91,123,214,.35),rgba(224,138,60,.35));
+    z-index:0;
   }
-  .road-card:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+  .road-card{
+    background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:var(--sp-8) var(--sp-6);position:relative;z-index:1;overflow:hidden;
+    transition:transform .35s var(--ease-out),box-shadow .35s,border-color .35s;
+  }
+  .road-card::after{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--grad-brand);transform:scaleX(0);transform-origin:left;transition:transform .45s var(--ease-out)}
+  .road-card:hover{transform:translateY(-8px);box-shadow:var(--glow-blue);border-color:transparent}
+  .road-card:hover::after{transform:scaleX(1)}
   .road-num{
     width:38px;height:38px;border-radius:10px;display:grid;place-items:center;font-family:var(--serif);font-weight:700;
-    color:#fff;margin-bottom:14px;background:linear-gradient(135deg,var(--blue),var(--blue-deep));
+    color:#fff;margin-bottom:var(--sp-4);background:var(--grad-brand-deep);box-shadow:0 8px 20px -8px rgba(31,143,240,.6);
+    transition:transform .35s var(--ease-spring);
   }
-  .road-card:nth-child(2) .road-num{background:linear-gradient(135deg,var(--teal),var(--teal-deep))}
-  .road-card:nth-child(3) .road-num{background:linear-gradient(135deg,#5b7bd6,#3a52a0)}
-  .road-card:nth-child(4) .road-num{background:linear-gradient(135deg,#e08a3c,#c2660f)}
-  .road-card h4{font-size:1.06rem;margin-bottom:8px}
-  .road-card p{color:var(--slate);font-size:.9rem}
+  .road-card:hover .road-num{transform:scale(1.1) rotate(-5deg)}
+  .road-card:nth-child(2) .road-num{background:linear-gradient(135deg,var(--teal),var(--teal-deep));box-shadow:0 8px 20px -8px rgba(18,182,168,.6)}
+  .road-card:nth-child(3) .road-num{background:linear-gradient(135deg,#5b7bd6,#3a52a0);box-shadow:0 8px 20px -8px rgba(91,123,214,.6)}
+  .road-card:nth-child(4) .road-num{background:linear-gradient(135deg,#e08a3c,#c2660f);box-shadow:0 8px 20px -8px rgba(224,138,60,.6)}
+  .road-card h4{font-size:var(--fs-h4);margin-bottom:var(--sp-2)}
+  .road-card p{color:var(--slate);font-size:var(--fs-body)}
+  @media(max-width:980px){.road-grid::before{display:none}}
 
   /* ---------- GLOBAL PRESENCE ---------- */
   .global{background:var(--navy-800);color:#fff;position:relative;overflow:hidden}
@@ -479,46 +490,56 @@
   .geo-note{font-size:.74rem;color:rgba(255,255,255,.4);margin-top:14px;font-style:italic}
 
   /* ---------- FAQ ---------- */
-  .faq{background:var(--mist)}
-  .faq-list{display:flex;flex-direction:column;gap:14px;max-width:760px;margin:0 auto}
-  .faq-item{background:#fff;border:1px solid var(--line);border-radius:var(--radius-sm);overflow:hidden}
-  .faq-q{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 24px;cursor:pointer;font-weight:700;font-size:.98rem;font-family:var(--serif)}
-  .faq-q svg{width:20px;height:20px;flex:none;color:var(--blue);transition:transform .3s}
-  .faq-item.open .faq-q svg{transform:rotate(45deg)}
-  .faq-a{padding:0 24px;max-height:0;overflow:hidden;transition:max-height .35s ease,padding .35s ease;color:var(--slate);font-size:.93rem}
-  .faq-item.open .faq-a{padding:0 24px 22px;max-height:240px}
+  .faq{background:var(--grad-wash-light)}
+  .faq-list{display:flex;flex-direction:column;gap:var(--sp-3);max-width:760px;margin:0 auto}
+  .faq-item{background:#fff;border:1px solid var(--line);border-radius:var(--radius-sm);overflow:hidden;transition:border-color .3s,box-shadow .3s}
+  .faq-item:hover{border-color:rgba(31,143,240,.3)}
+  .faq-item.open{border-color:rgba(31,143,240,.45);box-shadow:var(--shadow)}
+  .faq-q{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:var(--sp-5) var(--sp-6);cursor:pointer;font-weight:700;font-size:1rem;font-family:var(--serif);transition:color .25s}
+  .faq-q:hover{color:var(--blue-deep)}
+  .faq-q .ico{width:26px;height:26px;flex:none;display:grid;place-items:center;border-radius:50%;background:rgba(31,143,240,.1);transition:transform .35s var(--ease-spring),background .3s}
+  .faq-q .ico svg{width:16px;height:16px;color:var(--blue);transition:transform .3s}
+  .faq-item.open .faq-q .ico{background:var(--grad-brand-deep)}
+  .faq-item.open .faq-q .ico svg{transform:rotate(45deg);color:#fff}
+  .faq-a{padding:0 var(--sp-6);max-height:0;overflow:hidden;transition:max-height .4s var(--ease-out),padding .4s ease;color:var(--slate);font-size:var(--fs-body)}
+  .faq-item.open .faq-a{padding:0 var(--sp-6) var(--sp-5);max-height:260px}
 
   /* ---------- CTA / CONTACT ---------- */
-  .cta{background:var(--white);padding:96px 0}
+  .cta{background:var(--white);padding:var(--sp-24) 0}
   .cta-card{
-    background:var(--navy-900);border-radius:28px;padding:62px 56px;color:#fff;position:relative;overflow:hidden;
+    background:var(--navy-900);border-radius:var(--radius-lg);padding:var(--sp-16) var(--sp-14);color:#fff;position:relative;overflow:hidden;
     box-shadow:var(--shadow-lg);
   }
-  .cta-card::before{content:"";position:absolute;inset:0;background:radial-gradient(600px 400px at 90% 10%,rgba(31,143,240,.3),transparent 60%),radial-gradient(500px 360px at 0% 100%,rgba(18,182,168,.24),transparent 60%)}
-  .cta-card .grid-tex{opacity:.6}
-  .cta-inner{position:relative;z-index:2;display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
-  .cta-inner h2{font-size:clamp(1.9rem,3.4vw,2.6rem);color:#fff;margin-bottom:16px}
-  .cta-inner p{color:rgba(255,255,255,.72);font-size:1.06rem;margin-bottom:26px}
+  .cta-card::before{content:"";position:absolute;inset:-10%;background:var(--grad-aurora-dark);animation:auroraDrift 20s ease-in-out infinite alternate}
+  .cta-card .grid-tex{opacity:.5}
+  .cta-inner{position:relative;z-index:2;display:grid;grid-template-columns:1.1fr .9fr;gap:var(--sp-12);align-items:center}
+  .cta-card .eyebrow{color:var(--teal);margin-bottom:var(--sp-3)}
+  .cta-inner h2{font-size:var(--fs-h2);color:#fff;margin-bottom:var(--sp-4)}
+  .cta-inner p{color:rgba(255,255,255,.72);font-size:var(--fs-lead);margin-bottom:var(--sp-6)}
   .cta-actions{display:flex;gap:14px;flex-wrap:wrap}
-  .cta-points{display:flex;flex-direction:column;gap:14px}
-  .cta-point{display:flex;gap:12px;align-items:center;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:13px;padding:15px 18px}
+  .cta-points{display:flex;flex-direction:column;gap:var(--sp-3)}
+  .cta-point{display:flex;gap:var(--sp-3);align-items:center;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:13px;padding:var(--sp-4) var(--sp-5);transition:transform .3s var(--ease-out),background .3s,border-color .3s}
+  .cta-point:hover{transform:translateX(5px);background:rgba(255,255,255,.08);border-color:rgba(18,182,168,.3)}
   .cta-point svg{width:22px;height:22px;color:var(--teal);flex:none}
-  .cta-point b{color:#fff;font-size:.96rem;display:block}
-  .cta-point span{color:rgba(255,255,255,.6);font-size:.82rem}
+  .cta-point b{color:#fff;font-size:var(--fs-body);display:block}
+  .cta-point span{color:rgba(255,255,255,.6);font-size:var(--fs-xs)}
 
   /* ---------- FOOTER ---------- */
-  footer{background:var(--navy-900);color:#fff;padding:64px 0 30px;border-top:1px solid rgba(255,255,255,.06)}
-  .foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1.2fr;gap:40px;margin-bottom:46px}
-  .foot-about p{color:rgba(255,255,255,.55);font-size:.92rem;margin:18px 0;max-width:300px}
+  footer{position:relative;background:var(--navy-900);color:#fff;padding:var(--sp-16) 0 var(--sp-8);overflow:hidden}
+  footer::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(31,143,240,.4),rgba(18,182,168,.4),transparent)}
+  footer::after{content:"";position:absolute;bottom:-30%;left:50%;transform:translateX(-50%);width:80%;height:60%;background:radial-gradient(closest-side,rgba(31,143,240,.12),transparent);pointer-events:none}
+  footer .wrap{position:relative;z-index:1}
+  .foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1.2fr;gap:var(--sp-10);margin-bottom:var(--sp-12)}
+  .foot-about p{color:rgba(255,255,255,.55);font-size:var(--fs-body);margin:var(--sp-5) 0;max-width:300px}
   .foot-social{display:flex;gap:10px}
-  .foot-social a{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);transition:.25s}
-  .foot-social a:hover{background:var(--blue);transform:translateY(-3px)}
+  .foot-social a{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);transition:transform .3s var(--ease-spring),background .25s,box-shadow .25s}
+  .foot-social a:hover{background:var(--grad-brand-deep);border-color:transparent;transform:translateY(-3px) scale(1.06);box-shadow:0 10px 22px -8px rgba(31,143,240,.7)}
   .foot-social svg{width:18px;height:18px;color:#fff}
-  .foot-col h5{font-family:var(--serif);font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:18px;font-weight:600}
-  .foot-col ul{list-style:none;display:flex;flex-direction:column;gap:11px}
-  .foot-col ul li a{color:rgba(255,255,255,.72);font-size:.92rem;transition:color .2s}
-  .foot-col ul li a:hover{color:var(--teal)}
-  .foot-bottom{border-top:1px solid rgba(255,255,255,.08);padding-top:24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;color:rgba(255,255,255,.45);font-size:.84rem}
+  .foot-col h5{font-family:var(--serif);font-size:var(--fs-xs);letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:var(--sp-5);font-weight:600}
+  .foot-col ul{list-style:none;display:flex;flex-direction:column;gap:var(--sp-3)}
+  .foot-col ul li a{position:relative;color:rgba(255,255,255,.72);font-size:var(--fs-body);transition:color .2s,padding-left .25s}
+  .foot-col ul li a:hover{color:var(--teal);padding-left:6px}
+  .foot-bottom{border-top:1px solid rgba(255,255,255,.08);padding-top:var(--sp-6);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;color:rgba(255,255,255,.45);font-size:var(--fs-sm)}
 
   /* ---------- REVEAL ---------- */
   .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s var(--ease-out)}
@@ -881,23 +902,23 @@
     </div>
     <div class="faq-list reveal d1">
       <div class="faq-item">
-        <div class="faq-q">What if I don't know which package I need? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg></div>
+        <div class="faq-q">What if I don't know which package I need? <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg></span></div>
         <div class="faq-a"><p>That's completely normal! Book a free discovery call and we'll walk through your setup together, then recommend the right starting point — no pressure, no jargon.</p></div>
       </div>
       <div class="faq-item">
-        <div class="faq-q">Do you only work with large companies? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg></div>
+        <div class="faq-q">Do you only work with large companies? <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg></span></div>
         <div class="faq-a"><p>Not at all — our Starter and Growth packages were built specifically for small and mid-sized teams who want professional Salesforce help without enterprise-level costs.</p></div>
       </div>
       <div class="faq-item">
-        <div class="faq-q">What exactly is Revenue Cloud / CPQ, and do I need it? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg></div>
+        <div class="faq-q">What exactly is Revenue Cloud / CPQ, and do I need it? <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg></span></div>
         <div class="faq-a"><p>CPQ (Configure, Price, Quote) and Revenue Cloud handle how you price products, generate quotes, and manage subscriptions/billing. If quoting feels slow, manual, or error-prone, that's usually a sign it's worth a conversation.</p></div>
       </div>
       <div class="faq-item">
-        <div class="faq-q">We're already on CPQ — can you help us migrate to Revenue Cloud Advanced? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg></div>
+        <div class="faq-q">We're already on CPQ — can you help us migrate to Revenue Cloud Advanced? <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg></span></div>
         <div class="faq-a"><p>Yes — this is one of our core specialities. We audit your current setup, identify what's worth keeping, prune outdated configuration, and migrate cleanly to Revenue Cloud Advanced.</p></div>
       </div>
       <div class="faq-item">
-        <div class="faq-q">Do you offer ongoing support after go-live? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg></div>
+        <div class="faq-q">Do you offer ongoing support after go-live? <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg></span></div>
         <div class="faq-a"><p>Yes — every package includes some post-launch support, and we offer ongoing managed support plans for businesses that want a long-term Salesforce partner on call.</p></div>
       </div>
     </div>
@@ -911,11 +932,11 @@
       <div class="grid-tex"></div>
       <div class="cta-inner">
         <div>
-          <span class="eyebrow" style="color:var(--teal)">Let's Talk</span>
-          <h2 style="margin-top:14px">Got a Salesforce headache? Let's fix it.</h2>
+          <span class="eyebrow">Let's Talk</span>
+          <h2>Got a Salesforce headache? Let's fix it.</h2>
           <p>Whether it's a messy CPQ setup, a Salesforce instance that's grown out of control, or you're just getting started, no-obligation call. We'll listen, ask good questions, and tell you honestly what we think.</p>
           <div class="cta-actions">
-            <a href="mailto:info@vedsphere.com" class="btn btn-primary">Book a free consultation
+            <a href="mailto:info@vedsphere.com" class="btn btn-primary" data-magnetic>Book a free consultation
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
             </a>
             <a href="https://www.vedsphere.com" target="_blank" rel="noopener" class="btn btn-ghost">Visit vedsphere.com</a>
