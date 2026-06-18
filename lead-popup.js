@@ -53,52 +53,27 @@
 
   /* ---- visual panel ---- */
   .vlp-art{
-    position:relative;overflow:hidden;padding:38px 34px;color:#fff;
-    background:linear-gradient(160deg,#0a1322 0%,#102844 52%,#0d3a5c 100%);
+    position:relative;overflow:hidden;padding:42px 36px;color:#fff;
+    display:flex;flex-direction:column;justify-content:center;
+    background:linear-gradient(165deg,#0a1322,#152741);
   }
   .vlp-art::before{
-    content:"";position:absolute;inset:0;opacity:.5;pointer-events:none;
+    content:"";position:absolute;inset:0;pointer-events:none;
     background:
-      radial-gradient(420px 320px at 80% 8%,rgba(31,143,240,.45),transparent 60%),
-      radial-gradient(380px 320px at 8% 96%,rgba(18,182,168,.4),transparent 60%);
+      radial-gradient(420px 320px at 80% 10%,rgba(31,143,240,.3),transparent 60%),
+      radial-gradient(360px 300px at 10% 90%,rgba(18,182,168,.22),transparent 60%);
   }
-  .vlp-grid{
-    position:absolute;inset:0;opacity:.4;pointer-events:none;
-    background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),
-      linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);
-    background-size:34px 34px;
-    -webkit-mask-image:radial-gradient(420px 380px at 65% 25%,#000 30%,transparent 78%);
-    mask-image:radial-gradient(420px 380px at 65% 25%,#000 30%,transparent 78%);
+  .vlp-art-inner{position:relative;z-index:2}
+  .vlp-eyebrow{
+    font-weight:700;font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;color:#12b6a8;
   }
-  .vlp-orb{position:absolute;border-radius:50%;filter:blur(2px);opacity:.85;pointer-events:none}
-  .vlp-orb.o1{width:80px;height:80px;top:18%;right:-18px;background:radial-gradient(circle at 30% 30%,#33a4ff,#0a6fd0);animation:vlpFloat 7s ease-in-out infinite}
-  .vlp-orb.o2{width:46px;height:46px;bottom:24%;right:30%;background:radial-gradient(circle at 30% 30%,#12b6a8,#0d8e83);animation:vlpFloat 9s ease-in-out infinite reverse}
-  @keyframes vlpFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
-
-  .vlp-art-inner{position:relative;z-index:2;display:flex;flex-direction:column;height:100%}
-  .vlp-badge{
-    display:inline-flex;align-items:center;gap:8px;align-self:flex-start;
-    background:rgba(18,182,168,.16);border:1px solid rgba(18,182,168,.4);color:#7ff0e4;
-    padding:6px 13px;border-radius:99px;font-size:.7rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
-  }
-  .vlp-badge .vlp-pulse{width:7px;height:7px;border-radius:50%;background:#12b6a8;box-shadow:0 0 0 0 rgba(18,182,168,.6);animation:vlpPulse 2.2s infinite}
-  @keyframes vlpPulse{0%{box-shadow:0 0 0 0 rgba(18,182,168,.55)}70%{box-shadow:0 0 0 9px rgba(18,182,168,0)}100%{box-shadow:0 0 0 0 rgba(18,182,168,0)}}
-
-  .vlp-illus{margin:22px 0 18px}
-  .vlp-illus svg{width:118px;height:auto;display:block}
-
   .vlp-art h2{
-    font-family:"Sora",system-ui,sans-serif;font-weight:800;letter-spacing:-.02em;line-height:1.1;
-    font-size:1.62rem;margin:0 0 8px;
+    font-family:"Sora",system-ui,sans-serif;font-weight:800;letter-spacing:-.02em;line-height:1.2;
+    font-size:1.6rem;color:#fff;margin:14px 0 12px;
   }
-  .vlp-art h2 .vlp-grad{background:linear-gradient(105deg,#33a4ff,#12b6a8);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-  .vlp-art p.vlp-sub{color:rgba(255,255,255,.72);font-size:.95rem;line-height:1.5;margin:0 0 18px}
-  .vlp-list{list-style:none;margin:0 0 auto;padding:0;display:flex;flex-direction:column;gap:11px}
-  .vlp-list li{display:flex;align-items:center;gap:11px;font-size:.9rem;color:rgba(255,255,255,.9)}
-  .vlp-list .vlp-ck{flex:none;width:24px;height:24px;border-radius:7px;display:grid;place-items:center;background:linear-gradient(135deg,#1f8ff0,#0a6fd0)}
-  .vlp-list .vlp-ck svg{width:13px;height:13px;color:#fff}
-  .vlp-trust{display:flex;align-items:center;gap:9px;margin-top:22px;padding-top:18px;border-top:1px solid rgba(255,255,255,.1);font-size:.82rem;color:rgba(255,255,255,.7)}
-  .vlp-trust svg{width:18px;height:18px;color:#12b6a8;flex:none}
+  .vlp-art p.vlp-sub{color:rgba(255,255,255,.7);font-size:.92rem;line-height:1.5;margin:0 0 22px}
+  .vlp-point{display:flex;gap:10px;align-items:flex-start;margin-bottom:13px;font-size:.86rem;color:rgba(255,255,255,.82)}
+  .vlp-point svg{width:17px;height:17px;flex:none;margin-top:2px;color:#12b6a8}
 
   /* ---- form panel ---- */
   .vlp-form-wrap{padding:40px 36px;overflow-y:auto}
@@ -117,14 +92,14 @@
   @keyframes vlpFieldIn{to{opacity:1;transform:none}}
 
   .vlp-submit{
-    grid-column:1 / -1;margin-top:6px;display:inline-flex;align-items:center;justify-content:center;gap:9px;
-    font:inherit;font-weight:800;font-size:1rem;color:#fff;cursor:pointer;border:none;padding:15px 22px;border-radius:13px;
-    background:linear-gradient(105deg,#1f8ff0,#12b6a8);box-shadow:0 16px 34px -14px rgba(18,182,168,.75);
-    transition:transform .25s cubic-bezier(.22,1,.36,1),box-shadow .25s ease,filter .25s ease;
+    grid-column:1 / -1;margin-top:6px;display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    font:inherit;font-weight:700;font-size:.95rem;color:#fff;cursor:pointer;border:none;padding:14px 22px;border-radius:99px;
+    background:linear-gradient(105deg,#1f8ff0,#0a6fd0);box-shadow:0 16px 32px -14px rgba(31,143,240,.7);
+    transition:transform .25s ease,box-shadow .25s ease;
   }
-  .vlp-submit:hover{transform:translateY(-3px);box-shadow:0 22px 44px -14px rgba(18,182,168,.9);filter:brightness(1.05)}
+  .vlp-submit:hover{transform:translateY(-2px);box-shadow:0 20px 38px -14px rgba(31,143,240,.85)}
   .vlp-submit:active{transform:translateY(0) scale(.98)}
-  .vlp-submit svg{width:17px;height:17px}
+  .vlp-submit svg{width:18px;height:18px}
   .vlp-fine{grid-column:1 / -1;margin:4px 0 0;font-size:.74rem;color:#94a3b8;line-height:1.4;text-align:center}
 
   /* ---- success ---- */
@@ -143,16 +118,13 @@
     .vlp-card{grid-template-columns:1fr;width:100%;max-height:96vh;border-radius:24px 24px 0 0;
       transform:translateY(60px);}
     .vlp-art{padding:26px 24px 22px}
-    .vlp-illus{display:none}
     .vlp-art h2{font-size:1.35rem}
-    .vlp-list li:nth-child(n+3){display:none}     /* keep it short on mobile */
-    .vlp-trust{margin-top:16px;padding-top:14px}
     .vlp-form-wrap{padding:26px 22px 30px}
     .vlp-form{gap:12px}
   }
   @media (prefers-reduced-motion: reduce){
     #vlp-overlay,.vlp-card,.vlp-field,.vlp-success{transition:none!important;animation:none!important;opacity:1!important;transform:none!important}
-    .vlp-orb,.vlp-badge .vlp-pulse,.vlp-tick svg{animation:none!important}
+    .vlp-tick svg{animation:none!important}
   }
   `;
 
@@ -167,42 +139,13 @@
 
     <!-- visual panel -->
     <aside class="vlp-art">
-      <span class="vlp-grid"></span>
-      <span class="vlp-orb o1"></span><span class="vlp-orb o2"></span>
       <div class="vlp-art-inner">
-        <span class="vlp-badge"><span class="vlp-pulse"></span>Free Consultation</span>
-        <div class="vlp-illus">
-          <svg viewBox="0 0 140 110" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="vlpG1" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0" stop-color="#33a4ff"/><stop offset="1" stop-color="#0a6fd0"/>
-              </linearGradient>
-              <linearGradient id="vlpG2" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0" stop-color="#12b6a8"/><stop offset="1" stop-color="#0d8e83"/>
-              </linearGradient>
-            </defs>
-            <!-- cloud -->
-            <path d="M44 64a20 20 0 0 1 39-6 15 15 0 0 1 2 30H40a14 14 0 0 1-2-28c2 0 4 .5 6 1.3" fill="rgba(255,255,255,.10)" stroke="rgba(255,255,255,.5)" stroke-width="2"/>
-            <!-- rising bars -->
-            <rect x="52" y="62" width="9" height="18" rx="2.5" fill="url(#vlpG1)"/>
-            <rect x="66" y="52" width="9" height="28" rx="2.5" fill="url(#vlpG2)"/>
-            <rect x="80" y="44" width="9" height="36" rx="2.5" fill="url(#vlpG1)"/>
-            <!-- spark -->
-            <path d="M104 20l3.2 8.4L116 32l-8.8 3.6L104 44l-3.2-8.4L92 32l8.8-3.6z" fill="#ffd76a"/>
-            <circle cx="34" cy="30" r="4" fill="#12b6a8"/>
-          </svg>
-        </div>
-        <h2 id="vlp-title">Get more from <span class="vlp-grad">Salesforce.</span></h2>
-        <p class="vlp-sub">Book a free, no-pressure call. We'll pinpoint what's worth fixing first  no commitment.</p>
-        <ul class="vlp-list">
-          <li><span class="vlp-ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></span>Honest scoping in plain English</li>
-          <li><span class="vlp-ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></span>Revenue Cloud &amp; CPQ specialists</li>
-          <li><span class="vlp-ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></span>Fixed-scope, weeks not quarters</li>
-        </ul>
-        <div class="vlp-trust">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg>
-          Certified Salesforce Implementation Partner
-        </div>
+        <span class="vlp-eyebrow">Free Discovery Call</span>
+        <h2 id="vlp-title">Stuck with messy CPQ pricing or quoting?</h2>
+        <p class="vlp-sub">Tell us a bit about your setup and we'll get back to you within 1 business day, with no obligation and no sales pressure.</p>
+        <div class="vlp-point"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>30-min call with a Revenue Cloud &amp; CPQ specialist</div>
+        <div class="vlp-point"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Honest scoping, we'll tell you what's worth fixing first</div>
+        <div class="vlp-point"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>No commitment required</div>
       </div>
     </aside>
 
