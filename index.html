@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
+<script>document.documentElement.classList.remove('no-js');</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>VedSphere — Salesforce Revenue Cloud, CPQ & Implementation Partner | India & USA</title>
@@ -34,9 +35,46 @@
     --shadow-lg:0 40px 90px -40px rgba(10,19,34,.55);
     --radius:18px;
     --radius-sm:12px;
+    --radius-lg:24px;
     --maxw:1180px;
     --serif:"Sora",sans-serif;
     --body:"Plus Jakarta Sans",sans-serif;
+
+    /* ---- TYPE SCALE (single source of truth) ---- */
+    --fs-display:clamp(2.5rem,5.2vw,4rem);
+    --fs-h2:clamp(2rem,3.6vw,2.85rem);
+    --fs-h3:1.2rem;
+    --fs-h4:1.08rem;
+    --fs-lead:1.12rem;
+    --fs-body:.95rem;
+    --fs-sm:.86rem;
+    --fs-xs:.78rem;
+    --fs-eyebrow:.74rem;
+    --lh-tight:1.08;
+    --lh-snug:1.3;
+    --lh-body:1.6;
+
+    /* ---- SPACING (8pt) ---- */
+    --sp-1:4px;--sp-2:8px;--sp-3:12px;--sp-4:16px;--sp-5:20px;
+    --sp-6:24px;--sp-8:32px;--sp-10:40px;--sp-12:48px;--sp-14:56px;
+    --sp-16:64px;--sp-20:80px;--sp-24:96px;
+    --sec-pad:var(--sp-24);
+
+    /* ---- GRADIENTS + GLOW ---- */
+    --grad-brand:linear-gradient(105deg,var(--blue),var(--teal));
+    --grad-brand-deep:linear-gradient(105deg,var(--blue),var(--blue-deep));
+    --grad-aurora-dark:
+      radial-gradient(720px 480px at 78% 8%,rgba(31,143,240,.30),transparent 60%),
+      radial-gradient(640px 520px at 10% 95%,rgba(18,182,168,.22),transparent 62%),
+      radial-gradient(520px 420px at 95% 90%,rgba(91,123,214,.16),transparent 60%);
+    --grad-wash-light:linear-gradient(180deg,#f7f9fd 0%,#eef2f8 100%);
+    --grad-border:linear-gradient(160deg,rgba(31,143,240,.55),rgba(18,182,168,.4) 55%,rgba(31,143,240,0) 100%);
+    --glow-blue:0 24px 60px -28px rgba(31,143,240,.55);
+    --glow-teal:0 24px 60px -28px rgba(18,182,168,.5);
+
+    /* ---- MOTION ---- */
+    --ease-out:cubic-bezier(.16,1,.3,1);
+    --ease-spring:cubic-bezier(.34,1.56,.64,1);
   }
 
   *{margin:0;padding:0;box-sizing:border-box}
@@ -45,18 +83,36 @@
     font-family:var(--body);
     color:var(--ink);
     background:var(--white);
-    line-height:1.6;
+    line-height:var(--lh-body);
+    font-size:var(--fs-body);
     overflow-x:hidden;
     -webkit-font-smoothing:antialiased;
   }
-  h1,h2,h3,h4{font-family:var(--serif);line-height:1.08;letter-spacing:-.02em;font-weight:700}
+  h1,h2,h3,h4{font-family:var(--serif);line-height:var(--lh-tight);letter-spacing:-.02em;font-weight:700}
   a{color:inherit;text-decoration:none}
   ::selection{background:var(--blue);color:#fff}
   .wrap{max-width:var(--maxw);margin:0 auto;padding:0 26px}
   .eyebrow{
-    font-family:var(--body);font-weight:700;font-size:.74rem;letter-spacing:.18em;
+    font-family:var(--body);font-weight:700;font-size:var(--fs-eyebrow);letter-spacing:.18em;
     text-transform:uppercase;color:var(--blue);
+    display:inline-flex;align-items:center;gap:8px;
   }
+  /* gradient-text utility (reused tastefully on dark sections) */
+  .gradtext{
+    background:var(--grad-brand);-webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;color:transparent;
+  }
+  /* gradient hairline border on hover (cards) */
+  .gborder{position:relative}
+  .gborder::before{
+    content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;
+    background:var(--grad-border);
+    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+    mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor;mask-composite:exclude;
+    opacity:0;transition:opacity .4s ease;pointer-events:none;
+  }
+  .gborder:hover::before{opacity:1}
 
   /* ---------- NAV ---------- */
   header{position:fixed;top:0;left:0;right:0;z-index:100;transition:all .35s ease}
@@ -189,11 +245,11 @@
   .trust-grid .l{color:rgba(255,255,255,.55);font-size:.84rem;font-weight:500;margin-top:3px}
 
   /* ---------- SECTION SHELL ---------- */
-  section.block{padding:96px 0}
-  .sec-head{max-width:680px;margin-bottom:54px}
+  section.block{padding:var(--sec-pad) 0}
+  .sec-head{max-width:680px;margin-bottom:var(--sp-14)}
   .sec-head.center{margin-left:auto;margin-right:auto;text-align:center}
-  .sec-head h2{font-size:clamp(2rem,3.6vw,2.85rem);color:var(--ink);margin:14px 0 16px}
-  .sec-head p{color:var(--slate);font-size:1.08rem}
+  .sec-head h2{font-size:var(--fs-h2);color:var(--ink);margin:var(--sp-3) 0 var(--sp-4)}
+  .sec-head p{color:var(--slate);font-size:var(--fs-lead)}
 
   /* ---------- INTRO / APPROACH ---------- */
   .approach{background:var(--mist)}
@@ -384,9 +440,15 @@
   .foot-bottom{border-top:1px solid rgba(255,255,255,.08);padding-top:24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;color:rgba(255,255,255,.45);font-size:.84rem}
 
   /* ---------- REVEAL ---------- */
-  .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.3,1)}
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s var(--ease-out)}
   .reveal.show{opacity:1;transform:none}
   .reveal.d1{transition-delay:.08s}.reveal.d2{transition-delay:.16s}.reveal.d3{transition-delay:.24s}
+  /* Safety: if JS/GSAP never runs, content must never stay hidden */
+  .no-js .reveal{opacity:1;transform:none}
+  @media(prefers-reduced-motion:reduce){
+    .reveal{opacity:1!important;transform:none!important;transition:none!important}
+    *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+  }
 
   /* ---------- RESPONSIVE ---------- */
   @media(max-width:980px){
@@ -836,25 +898,28 @@
   </div>
 </footer>
 
+<!-- GSAP motion (CDN) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script>
-  // nav background on scroll
+(function(){
+  const REDUCE = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const FINE   = window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+
+  /* ---------- NAV: scroll background ---------- */
   const header=document.getElementById('header');
-  const onScroll=()=>{header.classList.toggle('navbg',window.scrollY>20)};
+  const onScroll=()=>header.classList.toggle('navbg',window.scrollY>20);
   onScroll();window.addEventListener('scroll',onScroll,{passive:true});
 
-  // mobile menu
+  /* ---------- MOBILE MENU ---------- */
   const burger=document.getElementById('burger');
   const menu=document.getElementById('mobileMenu');
-  burger.addEventListener('click',()=>menu.classList.toggle('open'));
-  menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>menu.classList.remove('open')));
+  if(burger&&menu){
+    burger.addEventListener('click',()=>{burger.classList.toggle('active');menu.classList.toggle('open');});
+    menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{burger.classList.remove('active');menu.classList.remove('open');}));
+  }
 
-  // reveal on scroll
-  const io=new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('show');io.unobserve(e.target)}});
-  },{threshold:.14,rootMargin:'0px 0px -40px 0px'});
-  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-
-  // FAQ accordion
+  /* ---------- FAQ ACCORDION ---------- */
   document.querySelectorAll('.faq-item').forEach(item=>{
     item.querySelector('.faq-q').addEventListener('click',()=>{
       const isOpen=item.classList.contains('open');
@@ -862,6 +927,88 @@
       if(!isOpen) item.classList.add('open');
     });
   });
+
+  /* ---------- COUNT-UP ---------- */
+  function countUp(el){
+    const target=parseFloat(el.dataset.count);
+    const suffix=el.dataset.suffix||'';
+    const prefix=el.dataset.prefix||'';
+    const dec=el.dataset.decimals?parseInt(el.dataset.decimals):0;
+    if(REDUCE){el.textContent=prefix+target.toFixed(dec)+suffix;return;}
+    const o={v:0};
+    gsap.to(o,{v:target,duration:1.4,ease:'power2.out',
+      onUpdate:()=>{el.textContent=prefix+o.v.toFixed(dec)+suffix;}});
+  }
+
+  const hasGSAP = window.gsap && window.ScrollTrigger;
+
+  if(hasGSAP && !REDUCE){
+    gsap.registerPlugin(ScrollTrigger);
+
+    /* Hero orchestrated load */
+    const heroBits=gsap.utils.toArray('.hero .reveal');
+    gsap.set('.reveal',{clearProps:''});
+    const tl=gsap.timeline({defaults:{ease:'power3.out'}});
+    tl.set('.hero .reveal',{opacity:0,y:28})
+      .to('.hero .reveal',{opacity:1,y:0,duration:.9,stagger:.12,onComplete:()=>heroBits.forEach(b=>b.classList.add('show'))},.15);
+
+    /* Scroll reveals (everything except hero) */
+    const items=gsap.utils.toArray('.reveal').filter(el=>!el.closest('.hero'));
+    ScrollTrigger.batch(items,{
+      start:'top 88%',
+      onEnter:batch=>gsap.to(batch,{opacity:1,y:0,duration:.8,stagger:.1,ease:'power3.out',
+        onStart:()=>batch.forEach(b=>b.classList.add('show'))}),
+      once:true
+    });
+    gsap.set(items,{opacity:0,y:26});
+
+    /* Count-ups */
+    document.querySelectorAll('[data-count]').forEach(el=>{
+      ScrollTrigger.create({trigger:el,start:'top 90%',once:true,onEnter:()=>countUp(el)});
+    });
+
+    /* Parallax drift on dark-section aurora backgrounds */
+    gsap.utils.toArray('[data-parallax]').forEach(el=>{
+      gsap.to(el,{yPercent:parseFloat(el.dataset.parallax)||12,ease:'none',
+        scrollTrigger:{trigger:el.closest('section')||el,start:'top bottom',end:'bottom top',scrub:true}});
+    });
+
+    /* Active nav link */
+    const navLinks=document.querySelectorAll('.navlinks a[href^="#"]');
+    navLinks.forEach(link=>{
+      const sec=document.querySelector(link.getAttribute('href'));
+      if(!sec)return;
+      ScrollTrigger.create({trigger:sec,start:'top center',end:'bottom center',
+        onToggle:self=>{if(self.isActive){navLinks.forEach(l=>l.classList.remove('active'));link.classList.add('active');}}});
+    });
+
+    window.addEventListener('load',()=>ScrollTrigger.refresh());
+  } else {
+    /* Fallback: no GSAP or reduced motion — reveal via IntersectionObserver */
+    const io=new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('show');io.unobserve(e.target);}});
+    },{threshold:.14,rootMargin:'0px 0px -40px 0px'});
+    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+    document.querySelectorAll('[data-count]').forEach(el=>{
+      const io2=new IntersectionObserver((en)=>{en.forEach(e=>{if(e.isIntersecting){countUp(el);io2.unobserve(el);}});},{threshold:.5});
+      io2.observe(el);
+    });
+  }
+
+  /* ---------- MAGNETIC BUTTONS (pointer-fine only) ---------- */
+  if(FINE && !REDUCE){
+    document.querySelectorAll('[data-magnetic]').forEach(btn=>{
+      const strength=12;
+      btn.addEventListener('pointermove',e=>{
+        const r=btn.getBoundingClientRect();
+        const mx=(e.clientX-r.left-r.width/2)/r.width;
+        const my=(e.clientY-r.top-r.height/2)/r.height;
+        btn.style.transform=`translate(${mx*strength}px,${my*strength}px)`;
+      });
+      btn.addEventListener('pointerleave',()=>{btn.style.transform='';});
+    });
+  }
+})();
 </script>
 
 <!-- Hero globe (cobe) -->
