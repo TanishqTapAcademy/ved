@@ -1,0 +1,83 @@
+<h2>Pick a design direction for the VedSphere redesign</h2>
+<p class="subtitle">Each is a real styled mini-hero — look at the type, color and mood. Click the one you're drawn to (or mix-and-match in the terminal). All three keep the brand trustworthy for a Salesforce partner, just at very different intensities.</p>
+
+<style>
+  .dir-mock{border-radius:16px;overflow:hidden;border:1px solid rgba(0,0,0,.12);margin-bottom:8px;cursor:pointer;transition:transform .25s, box-shadow .25s;}
+  .dir-mock:hover{transform:translateY(-4px);box-shadow:0 24px 60px -30px rgba(0,0,0,.5);}
+  .option.selected .dir-mock{outline:3px solid #2563eb;outline-offset:3px;}
+
+  /* A — Refined Enterprise */
+  .mA{background:radial-gradient(800px 400px at 80% 0%,rgba(56,135,255,.28),transparent 60%),linear-gradient(160deg,#070d1a,#0f1d33);color:#fff;padding:48px 44px;font-family:'Plus Jakarta Sans',sans-serif;}
+  .mA .eb{font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:#5eead4;font-weight:700}
+  .mA h3{font-family:Georgia,'Times New Roman',serif;font-size:2.6rem;line-height:1.05;letter-spacing:-.02em;margin:14px 0;font-weight:600}
+  .mA h3 em{font-style:italic;color:#7dd3fc}
+  .mA p{color:rgba(255,255,255,.6);max-width:460px;font-size:.95rem}
+  .mA .row{margin-top:22px;display:flex;gap:12px}
+  .mA .b1{background:#fff;color:#0f1d33;padding:11px 22px;border-radius:99px;font-weight:700;font-size:.85rem}
+  .mA .b2{border:1px solid rgba(255,255,255,.25);color:#fff;padding:11px 22px;border-radius:99px;font-weight:600;font-size:.85rem}
+
+  /* B — Bold Editorial */
+  .mB{background:#f3efe7;color:#16130f;padding:48px 44px;font-family:'Plus Jakarta Sans',sans-serif;position:relative}
+  .mB .eb{font-size:.7rem;letter-spacing:.24em;text-transform:uppercase;color:#c2410c;font-weight:800}
+  .mB h3{font-family:'Arial Black','Helvetica Neue',sans-serif;font-size:3.2rem;line-height:.95;letter-spacing:-.04em;margin:12px 0;font-weight:900;text-transform:uppercase}
+  .mB h3 span{color:#c2410c}
+  .mB p{color:#5c554b;max-width:440px;font-size:.95rem;font-weight:500}
+  .mB .row{margin-top:22px;display:flex;gap:12px}
+  .mB .b1{background:#16130f;color:#f3efe7;padding:12px 24px;border-radius:4px;font-weight:800;font-size:.85rem;text-transform:uppercase;letter-spacing:.03em}
+  .mB .b2{border:1.5px solid #16130f;color:#16130f;padding:12px 24px;border-radius:4px;font-weight:700;font-size:.85rem;text-transform:uppercase;letter-spacing:.03em}
+  .mB .tick{position:absolute;top:0;right:0;background:#c2410c;color:#fff;font-size:.65rem;font-weight:800;letter-spacing:.12em;padding:8px 16px;text-transform:uppercase}
+
+  /* C — Vibrant SaaS */
+  .mC{background:linear-gradient(140deg,#0b1120 0%,#13204a 55%,#1b1140 100%);color:#fff;padding:48px 44px;font-family:'Plus Jakarta Sans',sans-serif;position:relative;overflow:hidden}
+  .mC::before{content:"";position:absolute;width:340px;height:340px;border-radius:50%;top:-120px;right:-60px;background:radial-gradient(circle,rgba(99,102,241,.55),transparent 65%);filter:blur(20px)}
+  .mC::after{content:"";position:absolute;width:300px;height:300px;border-radius:50%;bottom:-130px;left:30%;background:radial-gradient(circle,rgba(34,211,238,.4),transparent 65%);filter:blur(20px)}
+  .mC>*{position:relative;z-index:2}
+  .mC .eb{display:inline-block;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:#a5b4fc;background:rgba(129,140,248,.14);border:1px solid rgba(129,140,248,.3);padding:6px 13px;border-radius:99px}
+  .mC h3{font-family:'Plus Jakarta Sans',sans-serif;font-size:2.7rem;line-height:1.04;letter-spacing:-.035em;margin:16px 0;font-weight:800}
+  .mC h3 span{background:linear-gradient(100deg,#67e8f9,#818cf8);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .mC p{color:rgba(255,255,255,.66);max-width:450px;font-size:.95rem}
+  .mC .row{margin-top:22px;display:flex;gap:12px}
+  .mC .b1{background:linear-gradient(100deg,#6366f1,#22d3ee);color:#0b1120;padding:12px 24px;border-radius:12px;font-weight:800;font-size:.85rem}
+  .mC .b2{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);color:#fff;padding:12px 24px;border-radius:12px;font-weight:600;font-size:.85rem}
+</style>
+
+<div class="options">
+
+  <div class="option" data-choice="a" onclick="toggleSelect(this)">
+    <div class="dir-mock">
+      <div class="mA">
+        <div class="eb">Salesforce Revenue Cloud &amp; CPQ Partner</div>
+        <h3>Get more from Salesforce — <em>especially the hard parts.</em></h3>
+        <p>A refined, premium enterprise feel. Deep midnight navy, an elegant italic serif for headlines, glassmorphism and generous whitespace. Quietly expensive.</p>
+        <div class="row"><div class="b1">See Packages</div><div class="b2">Talk to an expert</div></div>
+      </div>
+    </div>
+    <div class="content"><h3>A · Refined Enterprise</h3><p>Premium, calm, trustworthy. Serif display + airy layout. Lowest risk, very "high-end consultancy".</p></div>
+  </div>
+
+  <div class="option" data-choice="b" onclick="toggleSelect(this)">
+    <div class="dir-mock">
+      <div class="mB">
+        <div class="tick">Revenue Cloud · CPQ</div>
+        <div class="eb">Salesforce Implementation Partner</div>
+        <h3>Fix the<br><span>quoting mess.</span></h3>
+        <p>Bold editorial energy. Warm paper background, heavy oversized type, sharp burnt-orange accent, confident and very memorable. Stands out from every blue SaaS site.</p>
+        <div class="row"><div class="b1">See Packages</div><div class="b2">Talk to us</div></div>
+      </div>
+    </div>
+    <div class="content"><h3>B · Bold Editorial</h3><p>Distinctive, high-contrast, magazine-style. Highest "wow", most differentiated. Slightly braver for a B2B audience.</p></div>
+  </div>
+
+  <div class="option" data-choice="c" onclick="toggleSelect(this)">
+    <div class="dir-mock">
+      <div class="mC">
+        <div class="eb">● Revenue Cloud &amp; CPQ specialists</div>
+        <h3>Get more from Salesforce — <span>especially Revenue&nbsp;Cloud&nbsp;&amp;&nbsp;CPQ.</span></h3>
+        <p>Modern SaaS polish — your current look, levelled up. Aurora gradients, glow, indigo→cyan accent, soft depth. Familiar but far more dynamic and alive.</p>
+        <div class="row"><div class="b1">See Packages</div><div class="b2">Talk to an expert</div></div>
+      </div>
+    </div>
+    <div class="content"><h3>C · Vibrant Modern SaaS</h3><p>An evolution of what you have now — same navy DNA, but richer gradients, glow and motion. Safest upgrade path.</p></div>
+  </div>
+
+</div>
