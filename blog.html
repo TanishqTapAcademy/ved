@@ -189,6 +189,9 @@
   .featured .body{position:relative}
   .featured h2{font-size:clamp(1.7rem,2.4vw,2.05rem);color:#fff;margin:0 0 14px;max-width:560px;text-wrap:balance}
   .featured p{font-size:1.02rem;line-height:1.6;color:rgba(220,235,250,.8);margin:0 0 24px;max-width:520px}
+  .featured .feat-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:right center;z-index:0}
+  .featured .feat-shade{position:absolute;inset:0;z-index:1;background:linear-gradient(165deg,rgba(7,20,38,.42) 0%,rgba(7,20,38,.28) 40%,rgba(7,20,38,.85) 100%)}
+  .featured .tags,.featured .body{z-index:2}
 
   /* standard card */
   .post{
@@ -208,12 +211,14 @@
     background-image:radial-gradient(rgba(255,255,255,.2) 1px,transparent 1px);background-size:15px 15px;
   }
   .post .thumb::after{
-    content:"";position:absolute;top:-40px;right:-40px;width:160px;height:160px;border-radius:50%;
-    background:radial-gradient(circle,rgba(255,255,255,.28),transparent 70%);
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(to top,rgba(8,18,34,.72) 0%,rgba(8,18,34,.06) 55%,transparent 100%);
   }
+  .post .thumb .thumb-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
   .post .thumb .ptag{
-    position:relative;font-family:var(--serif);font-size:.7rem;letter-spacing:.08em;color:#fff;
-    border:1px solid rgba(255,255,255,.5);padding:5px 12px;border-radius:99px;
+    position:relative;z-index:1;font-family:var(--serif);font-size:.7rem;letter-spacing:.08em;color:#fff;
+    border:1px solid rgba(255,255,255,.55);background:rgba(8,20,38,.32);backdrop-filter:blur(3px);
+    padding:5px 12px;border-radius:99px;
   }
   .post .pbody{padding:22px 22px 24px;display:flex;flex-direction:column;flex:1}
   .post .pcat{font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--blue);margin-bottom:11px}
@@ -369,49 +374,49 @@
   <div class="wrap">
     <div class="filterbar" id="filterbar">
       <button class="pill active" data-cat="All">All <span class="count">6</span></button>
-      <button class="pill" data-cat="Revenue Cloud">Revenue Cloud <span class="count">2</span></button>
-      <button class="pill" data-cat="CPQ">CPQ <span class="count">1</span></button>
-      <button class="pill" data-cat="Migration">Migration <span class="count">1</span></button>
-      <button class="pill" data-cat="AI &amp; Agentforce">AI &amp; Agentforce <span class="count">2</span></button>
+      <button class="pill" data-cat="Thought Leadership">Thought Leadership <span class="count">2</span></button>
+      <button class="pill" data-cat="Training">Training <span class="count">4</span></button>
     </div>
 
     <div class="mag-grid" id="grid">
 
       <!-- FEATURED -->
-      <article class="card feat" data-cat="Revenue Cloud" data-text="revenue cloud rollout why it matters implementation business priya nair">
-        <a class="featured">
+      <article class="card feat" data-cat="Thought Leadership" data-text="thought leadership salesforce implementation strategy crm trust credibility sachin sharma">
+        <a class="featured" href="blog/thought-leadership-salesforce-implementation.html">
+          <img class="feat-img" src="blog/images/1.webp" alt="Thought leadership in Salesforce implementation" loading="eager" decoding="async">
+          <span class="feat-shade"></span>
           <div class="tags">
             <span class="tag-feat">★ FEATURED</span>
-            <span class="tag-ghost">REVENUE CLOUD</span>
+            <span class="tag-ghost">THOUGHT LEADERSHIP</span>
           </div>
           <div class="body">
-            <h2>Revenue Cloud, done right: a rollout playbook for growing teams</h2>
-            <p>Exploring Revenue Cloud, or trying to get more from an existing investment? Here's the sequencing, the pitfalls and the quick wins we use on every engagement.</p>
+            <h2>Thought leadership in Salesforce implementation: why it matters for your business</h2>
+            <p>Anyone can configure objects. The partners worth keeping tell you which features, in what order, and why — turning a CRM rollout into a revenue advantage.</p>
             <div class="author">
-              <div class="avatar">PN</div>
+              <div class="avatar">SS</div>
               <div>
-                <div class="nm">Priya Nair</div>
-                <div class="rl">Salesforce Revenue Architect</div>
+                <div class="nm">Sachin Sharma</div>
+                <div class="rl">Salesforce Strategy Lead</div>
               </div>
-              <span class="read">7 min read</span>
+              <span class="read">6 min read</span>
             </div>
           </div>
         </a>
       </article>
 
       <!-- STANDARD CARDS -->
-      <article class="card std" data-cat="CPQ" data-text="cpq quote to cash configure price quote sales efficiency daniel okoye">
-        <a class="post">
-          <div class="thumb"><span class="ptag">CPQ</span></div>
+      <article class="card std" data-cat="Thought Leadership" data-text="sustainable it carbon footprint net zero cloud green renewable energy emissions sachin sharma">
+        <a class="post alt" href="blog/reduce-digital-carbon-footprint.html">
+          <div class="thumb"><img class="thumb-img" src="blog/images/3.webp" alt="" loading="lazy" decoding="async"><span class="ptag">SUSTAINABILITY</span></div>
           <div class="pbody">
-            <span class="pcat">CPQ</span>
-            <h3>5 CPQ mistakes that quietly slow down your sales team</h3>
-            <p class="pexc">Misconfigured price rules and bloated product catalogs cost reps minutes on every quote. Here's how to spot and fix the common ones.</p>
+            <span class="pcat">Thought Leadership</span>
+            <h3>Reduce your digital carbon footprint with Salesforce</h3>
+            <p class="pexc">Every server and transaction has a carbon cost. Here's how Sustainable IT and Net Zero Cloud let you grow and decarbonise at once.</p>
             <div class="pfoot">
-              <div class="avatar">DO</div>
+              <div class="avatar">SS</div>
               <div>
-                <div class="nm">Daniel Okoye</div>
-                <div class="dt">Jun 12, 2026 · 6 min</div>
+                <div class="nm">Sachin Sharma</div>
+                <div class="dt">Mar 25, 2025 · 6 min</div>
               </div>
               <div class="arrow">→</div>
             </div>
@@ -419,18 +424,18 @@
         </a>
       </article>
 
-      <article class="card std" data-cat="Migration" data-text="migration legacy crm data salesforce cutover rahul mehta">
-        <a class="post alt">
-          <div class="thumb"><span class="ptag">MIGRATION</span></div>
+      <article class="card std" data-cat="Training" data-text="marketing cloud training email journey builder mobile messaging segmentation automation course certification">
+        <a class="post" href="blog/salesforce-marketing-cloud-training.html">
+          <div class="thumb"><img class="thumb-img" src="blog/images/5.webp" alt="" loading="lazy" decoding="async"><span class="ptag">MARKETING CLOUD</span></div>
           <div class="pbody">
-            <span class="pcat">Migration</span>
-            <h3>Migrating off a legacy CRM without losing a single deal</h3>
-            <p class="pexc">A field-tested checklist for data mapping, dedupe and a phased cutover that keeps your pipeline live throughout the move.</p>
+            <span class="pcat">Training</span>
+            <h3>Salesforce Marketing Cloud Training</h3>
+            <p class="pexc">An immersive, hands-on program on email, Journey Builder, mobile, segmentation and automation — built for certification.</p>
             <div class="pfoot">
-              <div class="avatar">RM</div>
+              <div class="avatar">VA</div>
               <div>
-                <div class="nm">Rahul Mehta</div>
-                <div class="dt">Jun 5, 2026 · 8 min</div>
+                <div class="nm">VedSphere Academy</div>
+                <div class="dt">Dec 3, 2023 · Live course</div>
               </div>
               <div class="arrow">→</div>
             </div>
@@ -438,18 +443,18 @@
         </a>
       </article>
 
-      <article class="card std" data-cat="AI &amp; Agentforce" data-text="agentforce ai agents service automation salesforce ananya rao">
-        <a class="post alt2">
-          <div class="thumb"><span class="ptag">AGENTFORCE</span></div>
+      <article class="card std" data-cat="Training" data-text="lwc lightning web components javascript apex development course certification">
+        <a class="post alt2" href="blog/salesforce-lwc-training.html">
+          <div class="thumb"><img class="thumb-img" src="blog/images/7.webp" alt="" loading="lazy" decoding="async"><span class="ptag">LWC</span></div>
           <div class="pbody">
-            <span class="pcat">AI &amp; Agentforce</span>
-            <h3>Where Agentforce actually pays off in the first 90 days</h3>
-            <p class="pexc">Skip the hype. These are the three service and sales workflows where AI agents deliver measurable wins quickly — and where to wait.</p>
+            <span class="pcat">Training</span>
+            <h3>Salesforce LWC Training</h3>
+            <p class="pexc">Master Lightning Web Components — modern JavaScript, reusable components, Apex integration, testing and performance.</p>
             <div class="pfoot">
-              <div class="avatar">AR</div>
+              <div class="avatar">VA</div>
               <div>
-                <div class="nm">Ananya Rao</div>
-                <div class="dt">May 28, 2026 · 5 min</div>
+                <div class="nm">VedSphere Academy</div>
+                <div class="dt">Dec 3, 2023 · Live course</div>
               </div>
               <div class="arrow">→</div>
             </div>
@@ -457,18 +462,18 @@
         </a>
       </article>
 
-      <article class="card std" data-cat="Revenue Cloud" data-text="revenue cloud billing subscription recurring forecast priya nair">
-        <a class="post">
-          <div class="thumb"><span class="ptag">REVENUE CLOUD</span></div>
+      <article class="card std" data-cat="Training" data-text="cpq configure price quote product configuration pricing discounting approvals renewals course certification">
+        <a class="post" href="blog/salesforce-cpq-training.html">
+          <div class="thumb"><img class="thumb-img" src="blog/images/9.webp" alt="" loading="lazy" decoding="async"><span class="ptag">CPQ</span></div>
           <div class="pbody">
-            <span class="pcat">Revenue Cloud</span>
-            <h3>Subscription billing on Salesforce: forecasting that finance trusts</h3>
-            <p class="pexc">Connecting quotes, contracts and billing so recurring revenue forecasts hold up — with the data model decisions that make it work.</p>
+            <span class="pcat">Training</span>
+            <h3>Salesforce CPQ Training</h3>
+            <p class="pexc">Master Configure, Price, Quote — product configuration, pricing rules, quote management, approvals, renewals and analytics.</p>
             <div class="pfoot">
-              <div class="avatar">PN</div>
+              <div class="avatar">VA</div>
               <div>
-                <div class="nm">Priya Nair</div>
-                <div class="dt">May 19, 2026 · 7 min</div>
+                <div class="nm">VedSphere Academy</div>
+                <div class="dt">Dec 3, 2023 · Live course</div>
               </div>
               <div class="arrow">→</div>
             </div>
@@ -476,18 +481,18 @@
         </a>
       </article>
 
-      <article class="card std" data-cat="AI &amp; Agentforce" data-text="ai data quality clean salesforce automation prompt ananya rao">
-        <a class="post alt">
-          <div class="thumb"><span class="ptag">AI READINESS</span></div>
+      <article class="card std" data-cat="Training" data-text="salesforce development apex soql dml triggers visualforce lightning integration testing governor limits course certification">
+        <a class="post alt" href="blog/salesforce-development-course.html">
+          <div class="thumb"><img class="thumb-img" src="blog/images/11.webp" alt="" loading="lazy" decoding="async"><span class="ptag">DEVELOPMENT</span></div>
           <div class="pbody">
-            <span class="pcat">AI &amp; Agentforce</span>
-            <h3>Your AI is only as good as your Salesforce data</h3>
-            <p class="pexc">Before you switch on agents, fix the foundations. A practical guide to the data hygiene that makes AI features trustworthy.</p>
+            <span class="pcat">Training</span>
+            <h3>Salesforce Development Course</h3>
+            <p class="pexc">Go from Apex fundamentals to real integrations — SOQL/DML, triggers, Visualforce, Lightning, testing and governor limits.</p>
             <div class="pfoot">
-              <div class="avatar">AR</div>
+              <div class="avatar">VA</div>
               <div>
-                <div class="nm">Ananya Rao</div>
-                <div class="dt">May 9, 2026 · 6 min</div>
+                <div class="nm">VedSphere Academy</div>
+                <div class="dt">Dec 3, 2023 · Live course</div>
               </div>
               <div class="arrow">→</div>
             </div>
