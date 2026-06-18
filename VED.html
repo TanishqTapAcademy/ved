@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VedSphere — Salesforce Revenue Cloud, CPQ & Implementation Partner | India & USA</title>
+<meta name="description" content="VedSphere helps growing businesses get more from Salesforce — Revenue Cloud, CPQ, Sales, Service & Marketing Cloud implementations, migrations and ongoing support. Based in India, serving clients across India & the USA.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="modulepreload" href="./cobe.min.js">
+<link rel="modulepreload" href="./phenomenon.min.js">
+<style>
+  :root{
+    --navy-900:#0a1322;
+    --navy-800:#0f1d33;
+    --navy-700:#152741;
+    --navy-600:#1c3252;
+    --ink:#0a1322;
+    --slate:#475569;
+    --slate-light:#64748b;
+    --mist:#f5f7fb;
+    --mist-2:#eef2f8;
+    --white:#ffffff;
+    --blue:#1f8ff0;
+    --blue-bright:#33a4ff;
+    --blue-deep:#0a6fd0;
+    --teal:#12b6a8;
+    --teal-deep:#0d8e83;
+    --line:rgba(15,29,51,.10);
+    --line-dark:rgba(255,255,255,.10);
+    --shadow-sm:0 1px 2px rgba(10,19,34,.06);
+    --shadow:0 18px 48px -20px rgba(10,19,34,.30);
+    --shadow-lg:0 40px 90px -40px rgba(10,19,34,.55);
+    --radius:18px;
+    --radius-sm:12px;
+    --maxw:1180px;
+    --serif:"Sora",sans-serif;
+    --body:"Plus Jakarta Sans",sans-serif;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{
+    font-family:var(--body);
+    color:var(--ink);
+    background:var(--white);
+    line-height:1.6;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{font-family:var(--serif);line-height:1.08;letter-spacing:-.02em;font-weight:700}
+  a{color:inherit;text-decoration:none}
+  ::selection{background:var(--blue);color:#fff}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 26px}
+  .eyebrow{
+    font-family:var(--body);font-weight:700;font-size:.74rem;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--blue);
+  }
+
+  /* ---------- NAV ---------- */
+  header{position:fixed;top:0;left:0;right:0;z-index:100;transition:all .35s ease}
+  .nav{
+    display:flex;align-items:center;justify-content:space-between;
+    height:74px;
+  }
+  .navbg{
+    background:rgba(10,19,34,.72);
+    backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+    border-bottom:1px solid rgba(255,255,255,.07);
+  }
+  .logo{display:flex;align-items:center;gap:11px;font-family:var(--serif);font-weight:800;font-size:1.28rem;color:#fff;letter-spacing:-.03em}
+  .logo .mark{
+    width:34px;height:34px;border-radius:9px;position:relative;flex:none;
+    background:linear-gradient(135deg,var(--blue) 0%,var(--teal) 100%);
+    box-shadow:0 6px 20px -6px rgba(31,143,240,.7);
+  }
+  .logo .mark::before{
+    content:"";position:absolute;inset:8px;border-radius:50%;
+    border:2.4px solid rgba(255,255,255,.92);border-right-color:transparent;border-bottom-color:transparent;
+    transform:rotate(20deg);
+  }
+  .logo span.dot{color:var(--teal)}
+  .navlinks{display:flex;align-items:center;gap:26px;list-style:none}
+  .navlinks a{color:rgba(255,255,255,.78);font-weight:500;font-size:.92rem;transition:color .2s}
+  .navlinks a:hover{color:#fff}
+  .navregion{
+    display:flex;align-items:center;gap:7px;color:rgba(255,255,255,.6);font-size:.78rem;
+    border:1px solid rgba(255,255,255,.16);padding:5px 11px;border-radius:99px;font-weight:600;
+  }
+  .navregion b{color:#fff;font-weight:600}
+  .nav-cta{
+    background:#fff;color:var(--navy-900);padding:10px 20px;border-radius:99px;
+    font-weight:700;font-size:.9rem;transition:transform .25s,box-shadow .25s;white-space:nowrap;
+  }
+  .nav-cta:hover{transform:translateY(-2px);box-shadow:0 12px 28px -10px rgba(255,255,255,.4)}
+  .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px}
+  .burger span{width:24px;height:2px;background:#fff;border-radius:2px;transition:.3s}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;background:var(--navy-900);color:#fff;overflow:hidden;
+    padding:170px 0 110px;
+  }
+  .hero::before{
+    content:"";position:absolute;inset:0;
+    background:
+      radial-gradient(700px 480px at 78% 12%,rgba(31,143,240,.28),transparent 60%),
+      radial-gradient(620px 520px at 12% 92%,rgba(18,182,168,.20),transparent 60%);
+  }
+  .grid-tex{
+    position:absolute;inset:0;opacity:.5;
+    background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+    background-size:54px 54px;
+    -webkit-mask-image:radial-gradient(800px 600px at 60% 30%,#000 30%,transparent 75%);
+    mask-image:radial-gradient(800px 600px at 60% 30%,#000 30%,transparent 75%);
+  }
+  .hero .wrap{position:relative;z-index:2}
+  .hero-globe{
+    position:absolute;z-index:1;top:60%;right:-19%;transform:translateY(-50%);
+    width:min(730px,56vw);aspect-ratio:1;pointer-events:none;
+  }
+  .hero-globe canvas{width:100%;height:100%;opacity:0;transition:opacity 1.1s ease;contain:layout paint size}
+  @media(max-width:980px){.hero-globe{display:none}}
+  /* compact + nudged hero panel */
+  .hero .hero-panel{max-width:330px;padding:20px;align-self:start;position:relative;top:-40px;left:-28px}
+  .hero .hero-panel-head{margin-bottom:14px}
+  .hero .hero-panel-head .ai{width:33px;height:33px}
+  .hero .hero-panel-head b{font-size:.94rem}
+  .hero .hero-panel .agent-row{padding:10px 12px;margin-bottom:7px}
+  .hero .hero-panel .agent-row .ic{width:29px;height:29px}
+  .hero .hero-panel .agent-row .txt b{font-size:.85rem}
+  .hero .hero-panel .agent-row .txt span{font-size:.72rem}
+  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center}
+  .hero-tag{
+    display:inline-flex;align-items:center;gap:9px;background:rgba(31,143,240,.12);
+    border:1px solid rgba(31,143,240,.3);color:var(--blue-bright);
+    padding:7px 15px;border-radius:99px;font-size:.78rem;font-weight:700;letter-spacing:.04em;margin-bottom:26px;
+  }
+  .hero-tag .pulse{width:7px;height:7px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 0 rgba(18,182,168,.6);animation:pulse 2.2s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(18,182,168,.55)}70%{box-shadow:0 0 0 9px rgba(18,182,168,0)}100%{box-shadow:0 0 0 0 rgba(18,182,168,0)}}
+  .hero h1{font-size:clamp(2.5rem,5.4vw,4.1rem);font-weight:800;letter-spacing:-.035em;margin-bottom:22px}
+  .hero h1 .grad{
+    background:linear-gradient(105deg,var(--blue-bright),var(--teal));
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  }
+  .hero p.lead{font-size:1.16rem;color:rgba(255,255,255,.72);max-width:540px;margin-bottom:34px;font-weight:400}
+  .hero-actions{display:flex;gap:14px;flex-wrap:wrap}
+  .btn{
+    display:inline-flex;align-items:center;gap:9px;font-weight:700;font-size:.97rem;
+    padding:15px 28px;border-radius:99px;cursor:pointer;border:none;transition:transform .25s,box-shadow .25s,background .25s;
+  }
+  .btn-primary{background:linear-gradient(105deg,var(--blue),var(--blue-deep));color:#fff;box-shadow:0 16px 36px -14px rgba(31,143,240,.8)}
+  .btn-primary:hover{transform:translateY(-3px);box-shadow:0 22px 44px -14px rgba(31,143,240,.9)}
+  .btn-ghost{background:rgba(255,255,255,.06);color:#fff;border:1px solid rgba(255,255,255,.18)}
+  .btn-ghost:hover{background:rgba(255,255,255,.12);transform:translateY(-3px)}
+  .btn svg{width:17px;height:17px}
+
+  /* hero panel */
+  .hero-panel{
+    background:linear-gradient(165deg,rgba(28,50,82,.85),rgba(15,29,51,.9));
+    border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:26px;
+    box-shadow:var(--shadow-lg);backdrop-filter:blur(8px);
+  }
+  .hero-panel-head{display:flex;align-items:center;gap:10px;margin-bottom:18px}
+  .hero-panel-head .ai{
+    width:38px;height:38px;border-radius:11px;flex:none;display:grid;place-items:center;
+    background:linear-gradient(135deg,var(--teal),var(--blue));color:#fff;
+  }
+  .hero-panel-head b{font-family:var(--serif);font-size:1.02rem;color:#fff;display:block}
+  .hero-panel-head small{color:rgba(255,255,255,.55);font-size:.78rem}
+  .agent-row{
+    display:flex;align-items:center;gap:12px;padding:13px 14px;border-radius:13px;
+    background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);margin-bottom:9px;
+  }
+  .agent-row .ic{width:32px;height:32px;border-radius:9px;display:grid;place-items:center;flex:none;font-size:.9rem}
+  .ic.b{background:rgba(31,143,240,.16);color:var(--blue-bright)}
+  .ic.t{background:rgba(18,182,168,.16);color:var(--teal)}
+  .agent-row .txt{flex:1}
+  .agent-row .txt b{display:block;color:#fff;font-size:.9rem;font-family:var(--body);font-weight:600}
+  .agent-row .txt span{color:rgba(255,255,255,.5);font-size:.76rem}
+  .agent-row .stat{font-family:var(--serif);font-weight:700;color:var(--teal);font-size:.92rem}
+
+  /* ---------- TRUST BAR ---------- */
+  .trust{background:var(--navy-800);border-top:1px solid rgba(255,255,255,.06);padding:34px 0}
+  .trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center}
+  .trust-grid .n{font-family:var(--serif);font-weight:800;font-size:2rem;color:#fff;letter-spacing:-.03em}
+  .trust-grid .n .u{color:var(--teal)}
+  .trust-grid .l{color:rgba(255,255,255,.55);font-size:.84rem;font-weight:500;margin-top:3px}
+
+  /* ---------- SECTION SHELL ---------- */
+  section.block{padding:96px 0}
+  .sec-head{max-width:680px;margin-bottom:54px}
+  .sec-head.center{margin-left:auto;margin-right:auto;text-align:center}
+  .sec-head h2{font-size:clamp(2rem,3.6vw,2.85rem);color:var(--ink);margin:14px 0 16px}
+  .sec-head p{color:var(--slate);font-size:1.08rem}
+
+  /* ---------- INTRO / APPROACH ---------- */
+  .approach{background:var(--mist)}
+  .appr-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+  .appr-list{display:flex;flex-direction:column;gap:20px}
+  .appr-item{display:flex;gap:16px}
+  .appr-item .num{
+    width:40px;height:40px;border-radius:11px;flex:none;display:grid;place-items:center;
+    font-family:var(--serif);font-weight:700;color:#fff;
+    background:linear-gradient(135deg,var(--blue),var(--blue-deep));
+  }
+  .appr-item:nth-child(2) .num{background:linear-gradient(135deg,var(--teal),var(--teal-deep))}
+  .appr-item:nth-child(3) .num{background:linear-gradient(135deg,#5b7bd6,#3a52a0)}
+  .appr-item h4{font-size:1.12rem;margin-bottom:4px}
+  .appr-item p{color:var(--slate);font-size:.96rem}
+
+  /* ---------- ALL CLOUDS / SERVICES GRID ---------- */
+  .services{background:#fff}
+  .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .svc-card{
+    background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:28px 26px;
+    transition:transform .35s cubic-bezier(.2,.7,.3,1),box-shadow .35s,border-color .35s;position:relative;overflow:hidden;
+  }
+  .svc-card::after{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .4s}
+  .svc-card:hover{transform:translateY(-6px);box-shadow:var(--shadow);border-color:transparent}
+  .svc-card:hover::after{transform:scaleX(1)}
+  .svc-card.featured{
+    background:linear-gradient(165deg,var(--navy-900),var(--navy-700));color:#fff;border-color:transparent;
+  }
+  .svc-card.featured h3,.svc-card.featured .svc-tag{color:#fff}
+  .svc-card.featured p{color:rgba(255,255,255,.7)}
+  .svc-card.featured .svc-ic{background:rgba(255,255,255,.1);color:var(--teal)}
+  .svc-card.featured::after{background:linear-gradient(90deg,var(--teal),var(--blue-bright))}
+  .svc-card.featured .pill-new{
+    position:absolute;top:18px;right:18px;background:rgba(18,182,168,.18);color:var(--teal);
+    font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:5px 11px;border-radius:99px;
+    border:1px solid rgba(18,182,168,.35);
+  }
+  .svc-ic{
+    width:50px;height:50px;border-radius:13px;display:grid;place-items:center;margin-bottom:18px;color:#fff;
+    background:linear-gradient(135deg,var(--blue),var(--blue-deep));
+  }
+  .svc-card:nth-child(2) .svc-ic{background:linear-gradient(135deg,var(--teal),var(--teal-deep))}
+  .svc-card:nth-child(3) .svc-ic{background:linear-gradient(135deg,#5b7bd6,#3a52a0)}
+  .svc-card:nth-child(5) .svc-ic{background:linear-gradient(135deg,#e08a3c,#c2660f)}
+  .svc-card:nth-child(6) .svc-ic{background:linear-gradient(135deg,#7a5cd6,#4d34a8)}
+  .svc-ic svg{width:24px;height:24px}
+  .svc-tag{font-size:.7rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--slate-light)}
+  .svc-card h3{font-size:1.18rem;margin:6px 0 10px}
+  .svc-card p{color:var(--slate);font-size:.92rem;margin-bottom:14px}
+  .svc-card ul{list-style:none;display:flex;flex-direction:column;gap:7px}
+  .svc-card ul li{display:flex;gap:8px;font-size:.85rem;color:var(--slate)}
+  .svc-card.featured ul li{color:rgba(255,255,255,.78)}
+  .svc-card ul li svg{width:15px;height:15px;flex:none;margin-top:2px;color:var(--teal)}
+  .svc-card.featured ul li svg{color:var(--teal)}
+
+  /* ---------- INDIA SPOTLIGHT ---------- */
+  .india{background:var(--mist-2);position:relative;overflow:hidden}
+  .india-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+  .india-card{
+    background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:34px;box-shadow:var(--shadow)
+  }
+  .india-row{display:flex;gap:14px;align-items:flex-start;padding:14px 0;border-bottom:1px solid var(--line)}
+  .india-row:last-child{border-bottom:none}
+  .india-row .ic{width:38px;height:38px;border-radius:10px;flex:none;display:grid;place-items:center;background:rgba(31,143,240,.1);color:var(--blue-deep)}
+  .india-row .ic svg{width:19px;height:19px}
+  .india-row b{display:block;font-size:.96rem;margin-bottom:2px}
+  .india-row span{color:var(--slate);font-size:.88rem}
+  .india-flag-chip{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);padding:6px 14px;border-radius:99px;font-size:.8rem;font-weight:700;color:var(--ink);margin-bottom:20px}
+
+  /* ---------- PACKAGE CATALOG ---------- */
+  .pkg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+  .pkg{
+    background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:30px 28px 32px;
+    position:relative;transition:transform .35s cubic-bezier(.2,.7,.3,1),box-shadow .35s,border-color .35s;overflow:hidden;
+    display:flex;flex-direction:column;
+  }
+  .pkg::after{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .4s}
+  .pkg:hover{transform:translateY(-8px);box-shadow:var(--shadow);border-color:transparent}
+  .pkg:hover::after{transform:scaleX(1)}
+  .pkg.starter{--accent:linear-gradient(90deg,var(--teal),var(--teal-deep))}
+  .pkg.growth{--accent:linear-gradient(90deg,var(--blue),var(--blue-bright))}
+  .pkg.scale{--accent:linear-gradient(90deg,#5b7bd6,#3a52a0)}
+  .pkg.popular{border-color:var(--blue);box-shadow:var(--shadow)}
+  .pkg-badge{
+    position:absolute;top:0;right:28px;background:linear-gradient(105deg,var(--blue),var(--blue-deep));
+    color:#fff;font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+    padding:7px 14px;border-radius:0 0 9px 9px;
+  }
+  .pkg .kick{font-size:.72rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--slate-light)}
+  .pkg h3{font-size:1.4rem;margin:8px 0 6px}
+  .pkg .price{display:flex;align-items:baseline;gap:6px;margin-bottom:6px}
+  .pkg .price .amt{font-family:var(--serif);font-weight:800;font-size:2.1rem;color:var(--ink)}
+  .pkg .price .cur{font-family:var(--serif);font-weight:700;font-size:1.1rem;color:var(--slate)}
+  .pkg .price .per{color:var(--slate-light);font-size:.85rem}
+  .pkg .desc{color:var(--slate);font-size:.92rem;margin-bottom:18px}
+  .pkg ul{list-style:none;display:flex;flex-direction:column;gap:11px;margin-bottom:24px;flex:1}
+  .pkg ul li{display:flex;gap:10px;font-size:.89rem;color:var(--slate);line-height:1.45}
+  .pkg ul li svg{width:18px;height:18px;flex:none;margin-top:2px;color:var(--teal)}
+  .pkg ul li b{color:var(--ink);font-weight:700}
+  .pkg-cta{
+    display:flex;align-items:center;justify-content:center;gap:8px;width:100%;text-align:center;font-weight:700;font-size:.94rem;
+    padding:13px 22px;border-radius:99px;border:1.5px solid var(--ink);color:var(--ink);transition:.25s;
+  }
+  .pkg.popular .pkg-cta{background:linear-gradient(105deg,var(--blue),var(--blue-deep));color:#fff;border-color:transparent;box-shadow:0 14px 30px -12px rgba(31,143,240,.7)}
+  .pkg-cta:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+
+  /* ---------- ROADMAP / PROCESS ---------- */
+  .road-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;position:relative}
+  .road-card{
+    background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:28px 24px;position:relative;
+    transition:transform .3s,box-shadow .3s;
+  }
+  .road-card:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+  .road-num{
+    width:38px;height:38px;border-radius:10px;display:grid;place-items:center;font-family:var(--serif);font-weight:700;
+    color:#fff;margin-bottom:14px;background:linear-gradient(135deg,var(--blue),var(--blue-deep));
+  }
+  .road-card:nth-child(2) .road-num{background:linear-gradient(135deg,var(--teal),var(--teal-deep))}
+  .road-card:nth-child(3) .road-num{background:linear-gradient(135deg,#5b7bd6,#3a52a0)}
+  .road-card:nth-child(4) .road-num{background:linear-gradient(135deg,#e08a3c,#c2660f)}
+  .road-card h4{font-size:1.06rem;margin-bottom:8px}
+  .road-card p{color:var(--slate);font-size:.9rem}
+
+  /* ---------- GLOBAL PRESENCE ---------- */
+  .global{background:var(--navy-800);color:#fff;position:relative;overflow:hidden}
+  .global::before{content:"";position:absolute;inset:0;background:radial-gradient(600px 400px at 20% 30%,rgba(31,143,240,.14),transparent 60%),radial-gradient(600px 400px at 90% 80%,rgba(18,182,168,.12),transparent 60%)}
+  .global .wrap{position:relative;z-index:2}
+  .global .sec-head h2{color:#fff}
+  .global .sec-head p{color:rgba(255,255,255,.66)}
+  .global .eyebrow{color:var(--teal)}
+  .geo-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .geo-card{
+    background:linear-gradient(165deg,rgba(28,50,82,.55),rgba(15,29,51,.65));
+    border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:34px;
+  }
+  .geo-head{display:flex;align-items:center;gap:14px;margin-bottom:22px}
+  .geo-flag{width:54px;height:54px;border-radius:13px;display:grid;place-items:center;font-size:1.7rem;flex:none;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)}
+  .geo-head b{font-family:var(--serif);font-size:1.3rem;color:#fff;display:block}
+  .geo-head small{color:var(--teal);font-size:.8rem;font-weight:600;letter-spacing:.05em}
+  .geo-line{display:flex;gap:12px;align-items:flex-start;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.08);font-size:.92rem;color:rgba(255,255,255,.78)}
+  .geo-line:last-child{border-bottom:none}
+  .geo-line svg{width:18px;height:18px;flex:none;margin-top:2px;color:var(--blue-bright)}
+  .geo-line a{color:rgba(255,255,255,.78);transition:color .2s}
+  .geo-line a:hover{color:#fff}
+  .geo-note{font-size:.74rem;color:rgba(255,255,255,.4);margin-top:14px;font-style:italic}
+
+  /* ---------- FAQ ---------- */
+  .faq{background:var(--mist)}
+  .faq-list{display:flex;flex-direction:column;gap:14px;max-width:760px;margin:0 auto}
+  .faq-item{background:#fff;border:1px solid var(--line);border-radius:var(--radius-sm);overflow:hidden}
+  .faq-q{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 24px;cursor:pointer;font-weight:700;font-size:.98rem;font-family:var(--serif)}
+  .faq-q svg{width:20px;height:20px;flex:none;color:var(--blue);transition:transform .3s}
+  .faq-item.open .faq-q svg{transform:rotate(45deg)}
+  .faq-a{padding:0 24px;max-height:0;overflow:hidden;transition:max-height .35s ease,padding .35s ease;color:var(--slate);font-size:.93rem}
+  .faq-item.open .faq-a{padding:0 24px 22px;max-height:240px}
+
+  /* ---------- CTA / CONTACT ---------- */
+  .cta{background:var(--white);padding:96px 0}
+  .cta-card{
+    background:var(--navy-900);border-radius:28px;padding:62px 56px;color:#fff;position:relative;overflow:hidden;
+    box-shadow:var(--shadow-lg);
+  }
+  .cta-card::before{content:"";position:absolute;inset:0;background:radial-gradient(600px 400px at 90% 10%,rgba(31,143,240,.3),transparent 60%),radial-gradient(500px 360px at 0% 100%,rgba(18,182,168,.24),transparent 60%)}
+  .cta-card .grid-tex{opacity:.6}
+  .cta-inner{position:relative;z-index:2;display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+  .cta-inner h2{font-size:clamp(1.9rem,3.4vw,2.6rem);color:#fff;margin-bottom:16px}
+  .cta-inner p{color:rgba(255,255,255,.72);font-size:1.06rem;margin-bottom:26px}
+  .cta-actions{display:flex;gap:14px;flex-wrap:wrap}
+  .cta-points{display:flex;flex-direction:column;gap:14px}
+  .cta-point{display:flex;gap:12px;align-items:center;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:13px;padding:15px 18px}
+  .cta-point svg{width:22px;height:22px;color:var(--teal);flex:none}
+  .cta-point b{color:#fff;font-size:.96rem;display:block}
+  .cta-point span{color:rgba(255,255,255,.6);font-size:.82rem}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--navy-900);color:#fff;padding:64px 0 30px;border-top:1px solid rgba(255,255,255,.06)}
+  .foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1.2fr;gap:40px;margin-bottom:46px}
+  .foot-about p{color:rgba(255,255,255,.55);font-size:.92rem;margin:18px 0;max-width:300px}
+  .foot-social{display:flex;gap:10px}
+  .foot-social a{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);transition:.25s}
+  .foot-social a:hover{background:var(--blue);transform:translateY(-3px)}
+  .foot-social svg{width:18px;height:18px;color:#fff}
+  .foot-col h5{font-family:var(--serif);font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:18px;font-weight:600}
+  .foot-col ul{list-style:none;display:flex;flex-direction:column;gap:11px}
+  .foot-col ul li a{color:rgba(255,255,255,.72);font-size:.92rem;transition:color .2s}
+  .foot-col ul li a:hover{color:var(--teal)}
+  .foot-bottom{border-top:1px solid rgba(255,255,255,.08);padding-top:24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;color:rgba(255,255,255,.45);font-size:.84rem}
+
+  /* ---------- REVEAL ---------- */
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.3,1)}
+  .reveal.show{opacity:1;transform:none}
+  .reveal.d1{transition-delay:.08s}.reveal.d2{transition-delay:.16s}.reveal.d3{transition-delay:.24s}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media(max-width:980px){
+    .hero-grid,.appr-grid,.cta-inner,.geo-grid,.india-grid{grid-template-columns:1fr;gap:40px}
+    .pkg-grid,.svc-grid{grid-template-columns:repeat(2,1fr)}
+    .road-grid{grid-template-columns:repeat(2,1fr)}
+    .trust-grid{grid-template-columns:repeat(2,1fr);gap:30px}
+    .foot-grid{grid-template-columns:1fr 1fr;gap:32px}
+    .navlinks,.navregion{display:none}
+    .burger{display:flex}
+    .nav-cta{display:none}
+    .mobile-menu{display:flex}
+  }
+  @media(max-width:560px){
+    .wrap{padding:0 18px}
+    section.block{padding:68px 0}
+    .hero{padding:130px 0 80px}
+    .cta-card{padding:40px 26px}
+    .geo-card,.india-card{padding:26px}
+    .foot-grid{grid-template-columns:1fr}
+    .pkg-grid,.svc-grid,.road-grid{grid-template-columns:1fr}
+  }
+
+  /* mobile menu */
+  .mobile-menu{display:none;flex-direction:column;position:fixed;top:74px;left:0;right:0;background:var(--navy-900);border-bottom:1px solid rgba(255,255,255,.1);padding:18px 26px 26px;z-index:99;transform:translateY(-120%);transition:transform .35s ease;max-height:80vh;overflow-y:auto}
+  .mobile-menu.open{transform:translateY(0)}
+  .mobile-menu a{color:rgba(255,255,255,.85);padding:13px 0;border-bottom:1px solid rgba(255,255,255,.06);font-weight:500}
+  .mobile-menu .nav-cta{display:inline-block;margin-top:16px;text-align:center}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header id="header">
+  <div class="wrap">
+    <nav class="nav">
+      <a href="#top" class="logo"><span class="mark"></span>Ved<span class="dot">Sphere</span></a>
+      <ul class="navlinks">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#revenue-cloud">Revenue Cloud &amp; CPQ</a></li>
+        <li><a href="#packages">Packages</a></li>
+        <li><a href="#process">How We Work</a></li>
+        <li><a href="#faq">FAQs</a></li>
+      </ul>
+      <div style="display:flex;align-items:center;gap:16px">
+        <span class="navregion">⚡ Salesforce Partner</span>
+        <a href="#contact" class="nav-cta">Get a Free Consultation</a>
+        <div class="burger" id="burger"><span></span><span></span><span></span></div>
+      </div>
+    </nav>
+  </div>
+</header>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#services">Services</a>
+  <a href="#revenue-cloud">Revenue Cloud &amp; CPQ</a>
+  <a href="#packages">Packages</a>
+  <a href="#process">How We Work</a>
+  <a href="#faq">FAQs</a>
+  <a href="#contact" class="nav-cta">Get a Free Consultation</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="grid-tex"></div>
+  <div class="hero-globe" aria-hidden="true"><canvas></canvas></div>
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <span class="hero-tag reveal"><span class="pulse"></span> Salesforce Implementation Partner</span>
+        <h1 class="reveal d1">Get more from Salesforce — especially <span class="grad">Revenue Cloud &amp; CPQ.</span></h1>
+        <p class="lead reveal d2">VedSphere is a certified Salesforce implementation partner helping growing businesses implement, migrate, and run Salesforce the right way. We specialise in Revenue Cloud and CPQ, and support every cloud across Sales, Service, Marketing, and beyond.</p>
+        <div class="hero-actions reveal d3">
+          <a href="#packages" class="btn btn-primary">See Packages &amp; Pricing
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a href="#contact" class="btn btn-ghost">Talk to an expert — it's free</a>
+        </div>
+      </div>
+      <div class="hero-panel reveal d2">
+        <div class="hero-panel-head">
+          <span class="ai">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
+          </span>
+          <div><b>Why teams choose us</b><small>Real outcomes, real talk</small></div>
+        </div>
+        <div class="agent-row">
+          <span class="ic b"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M14.6 9.1c-.5-.9-1.5-1.4-2.6-1.4-1.5 0-2.6.9-2.6 2.1s1.1 1.8 2.6 2.1 2.6.9 2.6 2.1-1.1 2.1-2.6 2.1c-1.1 0-2.1-.5-2.6-1.4M12 6v1.6M12 16.4V18"/></svg></span>
+          <div class="txt"><b>Revenue Cloud &amp; CPQ specialists</b><span>Our core focus, not a side gig</span></div>
+        </div>
+        <div class="agent-row">
+          <span class="ic t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 18h9.5a4 4 0 0 0 .8-7.92 5.5 5.5 0 0 0-10.58-1.2A3.75 3.75 0 0 0 7 18z"/></svg></span>
+          <div class="txt"><b>Every Salesforce cloud covered</b><span>Sales, Service, Marketing &amp; more</span></div>
+        </div>
+        <div class="agent-row">
+          <span class="ic b"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8.2 12 3 3 8.2v7.6L12 21l9-5.2z"/><path d="M3 8.2 12 13.4l9-5.2M12 13.4V21"/><path d="M7.5 5.6 16.5 10.8"/></svg></span>
+          <div class="txt"><b>Fixed-scope packages</b><span>Simple pricing, no surprises</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST -->
+<section class="trust">
+  <div class="wrap">
+          <div class="trust-grid">
+      <div class="reveal"><div class="n">2 – 4<span class="u"> wks</span></div><div class="l">Avg. base package go-live</div></div>
+      <div class="reveal d1"><div class="n">8<span class="u">+</span></div><div class="l">Salesforce clouds covered</div></div>
+      <div class="reveal d2"><div class="n">100<span class="u">%</span></div><div class="l">Fixed-scope, transparent delivery</div></div>
+      <div class="reveal d3"><div class="n">Certified</div><div class="l">Salesforce implementation partner</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- APPROACH -->
+<section class="block approach" id="process">
+  <div class="wrap">
+    <div class="appr-grid">
+      <div class="reveal">
+        <span class="eyebrow">Our Approach</span>
+        <h2 style="font-size:clamp(2rem,3.6vw,2.85rem);margin:14px 0 18px">Salesforce, simplified — built around how your team actually sells.</h2>
+        <p style="color:var(--slate);font-size:1.06rem">A lot of Salesforce projects fail because they're too big, too slow, or too vague. We do the opposite. We scope tightly, lean heavily on our Revenue Cloud &amp; CPQ expertise to fix pricing and quoting headaches, and ship working solutions in weeks — not quarters.</p>
+      </div>
+      <div class="appr-list">
+        <div class="appr-item reveal d1">
+          <div class="num">1</div>
+          <div><h4>Free discovery call, honest scoping</h4><p>We start by understanding your sales process and pain points — then tell you exactly what's worth fixing first.</p></div>
+        </div>
+        <div class="appr-item reveal d2">
+          <div class="num">2</div>
+          <div><h4>Configure, test, train — fast</h4><p>We build in short sprints with regular check-ins, so you always know what's happening and nothing feels like a black box.</p></div>
+        </div>
+        <div class="appr-item reveal d3">
+          <div class="num">3</div>
+          <div><h4>Support that doesn't disappear post go-live</h4><p>Ongoing admin support, enhancements, and Salesforce health checks — we stick around after launch.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ALL SERVICES / CLOUDS -->
+<section class="block services" id="services">
+  <div class="wrap">
+    <div class="sec-head center reveal">
+      <span class="eyebrow">What We Do</span>
+      <h2>Salesforce services for every cloud</h2>
+      <p>Whether you need a brand-new implementation, a tricky migration, or someone to simply keep things running — our team covers the full Salesforce ecosystem.</p>
+    </div>
+    <div class="svc-grid">
+
+      <article class="svc-card featured reveal">
+        <span class="pill-new">Our Specialty</span>
+        <div class="svc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h10"/></svg></div>
+        <span class="svc-tag">Revenue Cloud &amp; CPQ</span>
+        <h3>Quoting, pricing &amp; billing, sorted</h3>
+        <p>Complex price books, bundles, discounting rules, and approval flows — built right and migrated cleanly from legacy CPQ.</p>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>New CPQ implementations</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>CPQ → Revenue Cloud Advanced migration</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Subscription &amp; billing automation</li>
+        </ul>
+      </article>
+
+      <article class="svc-card reveal d1">
+        <div class="svc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 17l6-6 4 4 8-8"/><path d="M21 7v6h-6"/></svg></div>
+        <span class="svc-tag">Sales Cloud</span>
+        <h3>Pipeline &amp; sales process</h3>
+        <p>Leads, opportunities, forecasting and territory setup configured to match how your sales team works.</p>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Pipeline &amp; opportunity setup</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Lead routing &amp; assignment rules</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Dashboards &amp; forecasting</li>
+        </ul>
+      </article>
+
+      <article class="svc-card reveal d2">
+        <div class="svc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <span class="svc-tag">Service Cloud</span>
+        <h3>Faster, smarter support</h3>
+        <p>Case management, routing rules, and knowledge bases that help your support team respond faster.</p>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Case management &amp; SLAs</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Omni-channel routing</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Knowledge base setup</li>
+        </ul>
+      </article>
+
+      <article class="svc-card reveal">
+        <div class="svc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 6l-10 7L2 6"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg></div>
+        <span class="svc-tag">Marketing Cloud</span>
+        <h3>Campaigns that connect</h3>
+        <p>Email journeys, audience segmentation, and CRM sync so marketing and sales finally speak the same language.</p>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Email journeys &amp; automation</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Audience segmentation</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>CRM &amp; marketing data sync</li>
+        </ul>
+      </article>
+
+      <article class="svc-card reveal d1">
+        <div class="svc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.7 4 3 9 3s9-1.3 9-3V5M3 12c0 1.7 4 3 9 3s9-1.3 9-3"/></svg></div>
+        <span class="svc-tag">Data &amp; Integrations</span>
+        <h3>Clean data, connected systems</h3>
+        <p>Data Cloud setup, deduplication, and integrations with your ERP, finance, and e-commerce tools.</p>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Data Cloud &amp; unification</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>ERP &amp; third-party integrations</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Data cleansing &amp; migration</li>
+        </ul>
+      </article>
+
+      <article class="svc-card reveal d2">
+        <div class="svc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="7" width="16" height="12" rx="3"/><path d="M9 3v4M15 3v4M9 13h.01M15 13h.01M9 16h6"/></svg></div>
+        <span class="svc-tag">Agentforce &amp; AI</span>
+        <h3>Autonomous AI agents</h3>
+        <p>Practical Agentforce use cases — lead qualification, case triage, and renewal alerts that work while you sleep.</p>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Lead &amp; case-handling agents</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Renewal &amp; revenue alerts</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Prompt-safe configuration</li>
+        </ul>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- REVENUE CLOUD & CPQ SPOTLIGHT -->
+<section class="block premium" id="revenue-cloud" style="background:var(--navy-900);color:#fff;position:relative;overflow:hidden">
+  <div class="grid-tex"></div>
+  <div class="wrap" style="position:relative;z-index:2">
+    <div class="sec-head reveal">
+      <span class="eyebrow" style="color:var(--teal)">Our Specialty</span>
+      <h2 style="color:#fff">Revenue Cloud &amp; CPQ — where most teams get stuck (and we don't)</h2>
+      <p style="color:rgba(255,255,255,.66)">Pricing, quoting, and billing are the most tangled parts of Salesforce — and the part most consultants quietly avoid. It's the part we love.</p>
+    </div>
+    <div class="appr-grid" style="align-items:flex-start">
+      <div class="appr-list">
+        <div class="appr-item reveal">
+          <div class="num" style="background:linear-gradient(135deg,var(--blue),var(--blue-deep))">1</div>
+          <div><h4 style="color:#fff">New CPQ Implementations</h4><p style="color:rgba(255,255,255,.65)">Product catalogues, price rules, discount schedules, and approval workflows — set up to match how you actually price deals.</p></div>
+        </div>
+        <div class="appr-item reveal d1">
+          <div class="num" style="background:linear-gradient(135deg,var(--teal),var(--teal-deep))">2</div>
+          <div><h4 style="color:#fff">CPQ to Revenue Cloud Advanced Migration</h4><p style="color:rgba(255,255,255,.65)">Moving from legacy CPQ? We audit your existing configuration, prune the technical debt, and migrate cleanly — no copy-pasting old mess into a new system.</p></div>
+        </div>
+        <div class="appr-item reveal d2">
+          <div class="num" style="background:linear-gradient(135deg,#5b7bd6,#3a52a0)">3</div>
+          <div><h4 style="color:#fff">Subscription, Billing &amp; Renewals</h4><p style="color:rgba(255,255,255,.65)">Automated renewals, usage-based billing, and amendment flows that keep finance and sales in sync.</p></div>
+        </div>
+      </div>
+      <div class="hero-panel reveal d2" style="margin-top:0">
+        <div class="hero-panel-head">
+          <span class="ai"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg></span>
+          <div><b>Why migrate now?</b><small>Common signs it's time</small></div>
+        </div>
+        <div class="agent-row"><span class="ic b"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/></svg></span><div class="txt"><b>Quotes take too long to generate</b><span>Manual overrides everywhere</span></div></div>
+        <div class="agent-row"><span class="ic t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M2 12h20"/></svg></span><div class="txt"><b>Pricing rules are duct-taped together</b><span>Years of "quick fixes"</span></div></div>
+        <div class="agent-row"><span class="ic b"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 17l6-6 4 4 8-8"/></svg></span><div class="txt"><b>Renewals slip through the cracks</b><span>No automated visibility</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PACKAGE CATALOG -->
+<section class="block compare" id="packages" style="background:var(--mist)">
+  <div class="wrap">
+    <div class="sec-head center reveal">
+      <span class="eyebrow">Simple, Honest Pricing</span>
+      <h2>Packages for every stage</h2>
+      <p>Not sure where to start? Our Essentials package is built for teams who just need the basics done right — fast, focused, and with no long-term lock-in.</p>
+    </div>
+    <div class="pkg-grid">
+
+      <!-- ESSENTIALS -->
+      <article class="pkg starter reveal">
+        <span class="kick">Basic implementation</span>
+        <h3>Essentials</h3>
+        <div class="price"><span class="amt" style="font-size:1.6rem">Get a quote</span></div>
+        <p class="desc">A clean, no-frills setup of your core Salesforce instance — built to get your team off spreadsheets and onto a working CRM, fast.</p>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg><span>Setup of <b>core objects</b> — Leads, Accounts, Contacts, Opportunities</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg><span>Page layouts, fields &amp; record types tailored to your process</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg><span>User setup, profiles &amp; basic security</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg><span>Core reports &amp; dashboards</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg><span>Basic team training &amp; handover</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg><span>Delivered in <b>1–2 weeks</b></span></li>
+        </ul>
+        <a href="#contact" class="pkg-cta">Start with Essentials</a>
+      </article>
+
+      <!-- GROWTH -->
+      <article class="pkg growth popular reveal d1">
+        <span class="pkg-badge">Most Popular</span>
+        <span class="kick">Implementation + CPQ basics</span>
+        <h3>Growth</h3>
+        <div class="price"><span class="amt" style="font-size:1.6rem">Get a quote</span></div>
+        <p class="desc">Everything in Essentials, plus automation and a working CPQ setup — for teams ready to streamline how they sell and quote.</p>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg><span>Everything in <b>Essentials</b></span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg><span>Basic <b>CPQ setup</b> — price books, products &amp; quote templates</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg><span>Lead routing, assignment rules &amp; approval flows</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg><span>Email-to-case or basic Service Cloud setup</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg><span>Extended training &amp; documentation</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg><span>Delivered in <b>3–4 weeks</b></span></li>
+        </ul>
+        <a href="#contact" class="pkg-cta">Choose Growth</a>
+      </article>
+
+      <!-- ADVANCED -->
+      <article class="pkg scale reveal d2">
+        <span class="kick">Revenue Cloud &amp; multi-cloud</span>
+        <h3>Advanced</h3>
+        <div class="price"><span class="amt" style="font-size:1.6rem">Custom</span></div>
+        <p class="desc">For businesses with bigger needs — full Revenue Cloud Advanced migrations, multi-cloud projects, integrations, and AI agents.</p>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg><span><b>CPQ → Revenue Cloud Advanced</b> migration</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg><span>Multi-cloud implementation (Sales + Service + Marketing)</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg><span>Custom integrations &amp; Agentforce agents</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg><span>Unlimited users, dedicated project team</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg><span>Ongoing managed support plans available</span></li>
+        </ul>
+        <a href="#contact" class="pkg-cta">Talk to us</a>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="block">
+  <div class="wrap">
+    <div class="sec-head center reveal">
+      <span class="eyebrow">How We Work</span>
+      <h2>From first call to go-live</h2>
+      <p>A clear, predictable process — so you always know what's happening and when.</p>
+    </div>
+    <div class="road-grid">
+      <div class="road-card reveal">
+        <div class="road-num">1</div>
+        <h4>Free Discovery Call</h4>
+        <p>We learn about your business, your sales process, and what's currently slowing you down.</p>
+      </div>
+      <div class="road-card reveal d1">
+        <div class="road-num">2</div>
+        <h4>Scope &amp; Quote</h4>
+        <p>You get a clear proposal — what's included, the timeline, and a fixed price. No surprises later.</p>
+      </div>
+      <div class="road-card reveal d2">
+        <div class="road-num">3</div>
+        <h4>Build &amp; Test</h4>
+        <p>We configure, test, and walk you through everything before it goes live — with regular updates.</p>
+      </div>
+      <div class="road-card reveal d3">
+        <div class="road-num">4</div>
+        <h4>Launch &amp; Support</h4>
+        <p>Go live with confidence, backed by post-launch support and training for your team.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="block faq" id="faq">
+  <div class="wrap">
+    <div class="sec-head center reveal">
+      <span class="eyebrow">Frequently Asked Questions</span>
+      <h2>Got questions? We've got answers</h2>
+      <p>Still unsure which package fits? Book a free call and we'll figure it out together.</p>
+    </div>
+    <div class="faq-list reveal d1">
+      <div class="faq-item">
+        <div class="faq-q">What if I don't know which package I need? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg></div>
+        <div class="faq-a"><p>That's completely normal! Book a free discovery call and we'll walk through your setup together, then recommend the right starting point — no pressure, no jargon.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Do you only work with large companies? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg></div>
+        <div class="faq-a"><p>Not at all — our Starter and Growth packages were built specifically for small and mid-sized teams who want professional Salesforce help without enterprise-level costs.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What exactly is Revenue Cloud / CPQ, and do I need it? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg></div>
+        <div class="faq-a"><p>CPQ (Configure, Price, Quote) and Revenue Cloud handle how you price products, generate quotes, and manage subscriptions/billing. If quoting feels slow, manual, or error-prone, that's usually a sign it's worth a conversation.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">We're already on CPQ — can you help us migrate to Revenue Cloud Advanced? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg></div>
+        <div class="faq-a"><p>Yes — this is one of our core specialities. We audit your current setup, identify what's worth keeping, prune outdated configuration, and migrate cleanly to Revenue Cloud Advanced.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Do you offer ongoing support after go-live? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg></div>
+        <div class="faq-a"><p>Yes — every package includes some post-launch support, and we offer ongoing managed support plans for businesses that want a long-term Salesforce partner on call.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA / CONTACT -->
+<section class="cta" id="contact">
+  <div class="wrap">
+    <div class="cta-card reveal">
+      <div class="grid-tex"></div>
+      <div class="cta-inner">
+        <div>
+          <span class="eyebrow" style="color:var(--teal)">Let's Talk</span>
+          <h2 style="margin-top:14px">Got a Salesforce headache? Let's fix it.</h2>
+          <p>Whether it's a messy CPQ setup, a Salesforce instance that's grown out of control, or you're just getting started — book a free, no-obligation call. We'll listen, ask good questions, and tell you honestly what we think.</p>
+          <div class="cta-actions">
+            <a href="mailto:info@vedsphere.com" class="btn btn-primary">Book a free consultation
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+            <a href="https://www.vedsphere.com" target="_blank" rel="noopener" class="btn btn-ghost">Visit vedsphere.com</a>
+          </div>
+        </div>
+        <div class="cta-points">
+          <div class="cta-point"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg><div><b>No-obligation discovery call</b><span>Just an honest conversation</span></div></div>
+          <div class="cta-point"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h10"/></svg><div><b>Fixed-scope packages</b><span>Clear pricing from the start</span></div></div>
+          <div class="cta-point"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg><div><b>Delivered from India, for India &amp; USA</b><span>Local teams, global standard</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-about">
+        <a href="#top" class="logo"><span class="mark"></span>Ved<span class="dot">Sphere</span></a>
+        <p>A certified Salesforce implementation partner specialising in Revenue Cloud &amp; CPQ — with services across every Salesforce cloud, from quick essentials to full multi-cloud transformations.</p>
+        <div class="foot-social">
+          <a href="https://www.linkedin.com/company/vedsphere" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2zM8.34 18.34V9.93H5.67v8.41zM7 8.76a1.55 1.55 0 100-3.1 1.55 1.55 0 000 3.1m11.34 9.58v-4.61c0-2.46-1.31-3.6-3.06-3.6a2.64 2.64 0 00-2.39 1.32V9.93H10.2v8.41h2.67v-4.45c0-1.17.22-2.3 1.67-2.3s1.45 1.34 1.45 2.38v4.37z"/></svg></a>
+          <a href="https://instagram.com/vedsphere" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+          <a href="mailto:info@vedsphere.com" aria-label="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 6l-10 7L2 6"/></svg></a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h5>Services</h5>
+        <ul>
+          <li><a href="#revenue-cloud">Revenue Cloud &amp; CPQ</a></li>
+          <li><a href="#services">Sales Cloud</a></li>
+          <li><a href="#services">Service Cloud</a></li>
+          <li><a href="#services">Marketing Cloud</a></li>
+          <li><a href="#services">Agentforce &amp; AI</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="#process">How We Work</a></li>
+          <li><a href="#packages">Packages</a></li>
+          <li><a href="#faq">FAQs</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Get in touch</h5>
+        <ul>
+          <li><a href="mailto:info@vedsphere.com">info@vedsphere.com</a></li>
+          <li><a href="tel:+917014306553">+91 70143 06553</a></li>
+          <li><a href="https://www.vedsphere.com" target="_blank" rel="noopener">www.vedsphere.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 VedSphere Consultancy Private Limited. All rights reserved.</span>
+      <span>Revenue Cloud · CPQ · Salesforce Implementation Partner</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // nav background on scroll
+  const header=document.getElementById('header');
+  const onScroll=()=>{header.classList.toggle('navbg',window.scrollY>20)};
+  onScroll();window.addEventListener('scroll',onScroll,{passive:true});
+
+  // mobile menu
+  const burger=document.getElementById('burger');
+  const menu=document.getElementById('mobileMenu');
+  burger.addEventListener('click',()=>menu.classList.toggle('open'));
+  menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>menu.classList.remove('open')));
+
+  // reveal on scroll
+  const io=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('show');io.unobserve(e.target)}});
+  },{threshold:.14,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-item').forEach(item=>{
+    item.querySelector('.faq-q').addEventListener('click',()=>{
+      const isOpen=item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+      if(!isOpen) item.classList.add('open');
+    });
+  });
+</script>
+
+<!-- Hero globe (cobe) -->
+<script type="module">
+  import createGlobe from "./cobe.min.js";
+
+  const canvas = document.querySelector(".hero-globe canvas");
+  if (canvas && window.matchMedia("(min-width:981px)").matches) {
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const scale = 1.5; // render resolution (1.5 = crisp + light; 2 = full retina)
+    let phi = 0;
+    let width = 0;
+    const onResize = () => { width = canvas.offsetWidth; };
+    window.addEventListener("resize", onResize);
+    onResize();
+
+    const globe = createGlobe(canvas, {
+      devicePixelRatio: scale,
+      width: width * scale,
+      height: width * scale,
+      phi: 0,
+      theta: 0.26,
+      dark: 1,
+      diffuse: 1.1,
+      mapSamples: 12000,
+      mapBrightness: 5.4,
+      baseColor: [0.23, 0.33, 0.5],          // navy
+      markerColor: [18 / 255, 182 / 255, 168 / 255], // teal
+      glowColor: [0.18, 0.45, 0.78],          // blue atmosphere
+      markers: [
+        { location: [14.5995, 120.9842], size: 0.03 },
+        { location: [19.076, 72.8777], size: 0.1 },
+        { location: [23.8103, 90.4125], size: 0.05 },
+        { location: [30.0444, 31.2357], size: 0.07 },
+        { location: [39.9042, 116.4074], size: 0.08 },
+        { location: [-23.5505, -46.6333], size: 0.1 },
+        { location: [19.4326, -99.1332], size: 0.1 },
+        { location: [40.7128, -74.006], size: 0.1 },
+        { location: [34.6937, 135.5022], size: 0.05 },
+        { location: [41.0082, 28.9784], size: 0.06 },
+      ],
+      onRender: (state) => {
+        if (!reduce) phi += 0.004;
+        state.phi = phi;
+        state.width = width * scale;
+        state.height = width * scale;
+      },
+    });
+
+    setTimeout(() => (canvas.style.opacity = "1"), 0);
+  }
+</script>
+</body>
+</html>
