@@ -30,9 +30,8 @@ header{position:fixed;top:0;left:0;right:0;z-index:100;transition:all .35s ease}
 .nav{display:flex;align-items:center;justify-content:space-between;height:74px}
 .navbg{background:rgba(10,19,34,.72);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.07)}
 .logo{display:flex;align-items:center;gap:11px;font-family:var(--serif);font-weight:800;font-size:1.28rem;color:#fff;letter-spacing:-.03em}
-.logo .mark{width:34px;height:34px;border-radius:9px;position:relative;flex:none;background:linear-gradient(135deg,var(--blue) 0%,var(--teal) 100%);box-shadow:0 6px 20px -6px rgba(31,143,240,.7)}
-.logo .mark::before{content:"";position:absolute;inset:8px;border-radius:50%;border:2.4px solid rgba(255,255,255,.92);border-right-color:transparent;border-bottom-color:transparent;transform:rotate(20deg)}
-.logo span.dot{color:var(--teal)}
+.logo .mark{width:34px;height:34px;border-radius:50%;flex:none;object-fit:contain;display:block}
+.logo span.dot{color:var(--blue)}
 .navlinks{display:flex;align-items:center;gap:26px;list-style:none}
 .navlinks a{color:rgba(255,255,255,.78);font-weight:500;font-size:.92rem;transition:color .2s}
 .navlinks a:hover{color:#fff}

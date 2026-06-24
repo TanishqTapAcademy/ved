@@ -115,11 +115,24 @@
   /* ---- responsive ---- */
   @media(max-width:720px){
     #vlp-overlay{padding:0;align-items:flex-end}
-    .vlp-card{grid-template-columns:1fr;width:100%;max-height:96vh;border-radius:24px 24px 0 0;
-      transform:translateY(60px);}
-    .vlp-art{padding:26px 24px 22px}
-    .vlp-art h2{font-size:1.35rem}
-    .vlp-form-wrap{padding:26px 22px 30px}
+    /* bottom-sheet: compact header pinned on top, form fills the rest */
+    .vlp-card{
+      display:flex;flex-direction:column;
+      width:100%;max-height:90vh;border-radius:24px 24px 0 0;
+      transform:translateY(60px);
+    }
+    /* trim the visual panel to just the headline so the form gets the
+       focus and the space on small screens */
+    .vlp-art{flex:none;padding:20px 22px 16px}
+    .vlp-art h2{font-size:1.2rem;margin:8px 0 0;line-height:1.25}
+    .vlp-art p.vlp-sub{display:none}
+    .vlp-point{display:none}
+    /* form takes the remaining height and scrolls inside if it overflows,
+       so the submit button is always reachable */
+    .vlp-form-wrap{
+      flex:1 1 auto;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;
+      padding:22px 22px calc(24px + env(safe-area-inset-bottom));
+    }
     .vlp-form{gap:12px}
   }
   @media (prefers-reduced-motion: reduce){
