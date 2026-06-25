@@ -11,13 +11,17 @@
 (function () {
   "use strict";
 
+  // Desktop / web view only — never show on mobile (matches the popup's own
+  // 720px "mobile" breakpoint used in the CSS below).
+  if (window.matchMedia && window.matchMedia("(max-width: 720px)").matches) return;
+
   // Don't run if already submitted in the past, or already seen this session.
   try {
     if (localStorage.getItem("vlp_submitted") === "1") return;
     if (sessionStorage.getItem("vlp_seen") === "1") return;
   } catch (e) {/* storage blocked — still show, just won't persist */}
 
-  var DELAY_MS = 10000;
+  var DELAY_MS = 15000;
   var reduce = window.matchMedia &&
     window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -28,9 +32,11 @@
   #vlp-overlay{
     position:fixed;inset:0;z-index:2147483000;display:flex;align-items:center;justify-content:center;
     padding:20px;background:rgba(7,14,26,.62);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
-    opacity:0;transition:opacity .4s ease;font-family:"Plus Jakarta Sans",system-ui,-apple-system,sans-serif;
+    opacity:0;visibility:hidden;pointer-events:none;
+    transition:opacity .4s ease,visibility 0s linear .4s;
+    font-family:"Plus Jakarta Sans",system-ui,-apple-system,sans-serif;
   }
-  #vlp-overlay.vlp-open{opacity:1}
+  #vlp-overlay.vlp-open{opacity:1;visibility:visible;pointer-events:auto;transition:opacity .4s ease}
   #vlp-overlay *{box-sizing:border-box}
   .vlp-card{
     position:relative;display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);
