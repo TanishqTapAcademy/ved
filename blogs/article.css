@@ -31,6 +31,7 @@ header{position:fixed;top:0;left:0;right:0;z-index:100;transition:all .35s ease}
 .navbg{background:rgba(10,19,34,.72);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.07)}
 .logo{display:flex;align-items:center;gap:11px;font-family:var(--serif);font-weight:800;font-size:1.28rem;color:#fff;letter-spacing:-.03em}
 .logo .mark{width:34px;height:34px;border-radius:50%;flex:none;object-fit:contain;display:block}
+.logo .fulllogo{height:38px;width:auto;flex:none;display:block}
 .logo span.dot{color:var(--blue)}
 .navlinks{display:flex;align-items:center;gap:26px;list-style:none}
 .navlinks a{color:rgba(255,255,255,.78);font-weight:500;font-size:.92rem;transition:color .2s}
